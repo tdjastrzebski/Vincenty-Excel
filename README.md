@@ -1,5 +1,5 @@
 # Vincenty Direct and Inverse Solution of Geodesics on the Ellipsoid
-algorithms by Thaddeus Vincenty (1975)
+## algorithms by Thaddeus Vincenty (1975)
 
 Based on the implementation in Java Script by © Chris Veness 2002-2017 MIT License  
 https://www.movable-type.co.uk/scripts/latlong-vincenty.html  
