@@ -2,7 +2,7 @@
 **to calculate new coordinate based on azimuth and distance (direct)  
 or distance and azimuth based on two coordinates (inverse)**
 > **Algorithms by Thaddeus Vincenty (1975)**  
-> Based on the implementation in Java Script by © Chris Veness 2002-2017 MIT License  
+> Based on the implementation in Java Script by Chris Veness
 > https://www.movable-type.co.uk/scripts/latlong-vincenty.html  
 > https://github.com/chrisveness/geodesy
 

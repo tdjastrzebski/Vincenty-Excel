@@ -9,7 +9,7 @@ Attribute VB_Name = "Vincenty"
 ' Ported to VBA by (c) Tomasz Jastrzebski 2018 MIT Licence
 ' https://github.com/tdjastrzebski/VincentyExcel
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-' Based on the implementation by (c) Chris Veness 2002-2017 MIT Licence
+' Based on the implementation by Chris Veness
 ' https://www.movable-type.co.uk/scripts/latlong-vincenty.html
 ' https://github.com/chrisveness/geodesy
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
