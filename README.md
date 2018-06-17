@@ -10,7 +10,7 @@ To make the long story short, I was looking for a way to calculate coordinates, 
 I checked several available solutions but they were either incomplete, did not work or results were inaccurate.
 That is how I ended up developing my own, complete Vincenty Direct and Inverse formulae implementation.
 
-Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** calculations as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion and uses **WGS84** model.
+Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** formulae as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion and uses **WGS84** model.
 
 + `VincentyDirLat(lat As Double, lon As Double, azimuth As Double, distance As Double) As Variant`  
 Calculates geodesic latitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty direct formula for ellipsoids
