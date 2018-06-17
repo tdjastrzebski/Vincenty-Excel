@@ -1,6 +1,5 @@
 # Vincenty Direct and Inverse Solution of Geodesics on the Ellipsoid - Excel VBA implementation
-## algorithms by Thaddeus Vincenty (1975)
-
+> Algorithms by Thaddeus Vincenty (1975)
 > Based on the implementation in Java Script by © Chris Veness 2002-2017 MIT License  
 > https://www.movable-type.co.uk/scripts/latlong-vincenty.html  
 > https://github.com/chrisveness/geodesy
@@ -14,6 +13,15 @@ Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty In
 + [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
 + [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Add-in
 + [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Workbook
+
++ `VincentyDirLat(lat As Double, lon As Double, azimuth As Double, distance As Double) As Variant` Calculates geodesic latitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty direct formula for ellipsoids
++ `VincentyDirLon(lat As Double, lon As Double, azimuth As Double, distance As Double) As Variant' Calculates geodesic longitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty direct formula for ellipsoids
++ `VincentyDirRevAzimuth(lat As Double, lon As Double, azimuth As Double, distance As Double) As Variant` Calculates geodesic reverse azimuth (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty direct formula for ellipsoids
++ `VincentyInvDistance(lat1 As Double, lon1 As Double, lat2 As Double, lon2 As Double) As Variant` Calculates geodesic distance (in m) between two points specified by latitude/longitude (in numeric degrees) using Vincenty inverse formula for ellipsoids
++ `VincentyInvFwdAzimuth(lat1 As Double, lon1 As Double, lat2 As Double, lon2 As Double) As Variant` Calculates geodesic azimuth (in degrees) between two points specified by latitude/longitude (in numeric degrees) using Vincenty inverse formula for ellipsoids
++ `VincentyInvRevAzimuth(lat1 As Double, lon1 As Double, lat2 As Double, lon2 As Double) As Variant` Calculates geodesic reverse azimuth (in degrees) between two points specified by latitude/longitude (in numeric degrees) using Vincenty inverse formula for ellipsoids
++ `ConvertDegrees(decimalDeg As Double) As String` Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format
++ `ConvertDecimal(degreeDeg As String) As Variant` Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value
 
 For better change tracking source code has been placed separately in [Vincenty.bas](Vincenty.bas), [InvParams.cls](InvParams.cls), [DirParams.cls](DirParams.cls) files.
 
