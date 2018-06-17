@@ -14,13 +14,13 @@ Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty In
 Source code for better change tracking has been placed separately in `Vincenty.bas`, `InvParams.cls`, `DirParams.cls` files.
 
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
-against **Geoscience Australia** website:
+against **Geoscience Australia** website:  
 + http://www.ga.gov.au/geodesy/datums/vincenty_direct.jsp
-+ http://www.ga.gov.au/geodesy/datums/vincenty_inverse.jsp
++ http://www.ga.gov.au/geodesy/datums/vincenty_inverse.jsp  
 and **GeodSolve library** by Charles Karney:
 + https://geographiclib.sourceforge.io/cgi-bin/GeodSolve
 + https://geographiclib.sourceforge.io/scripts/geod-google.html
-+ https://link.springer.com/article/10.1007%2Fs00190-012-0578-z
++ https://link.springer.com/article/10.1007%2Fs00190-012-0578-z  
 For complete results see **VincentTest.xlsm** file.
 
 References:
