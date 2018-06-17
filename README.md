@@ -9,9 +9,9 @@ To make the long story short, I as looking for a way to calculate coordinates, d
 I checked several available solutions but they were either incomplete, did not work or results were inacurate.
 That is how I ended up developing my own, complete Vincenty Direct and Inverse formulae implementation.
 
-Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** calculations as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion and uses WGS84 model. Functions are available in Excel [Vincenty.xlsm](https://github.com/tdjastrzebski/VincentyExcel/raw/master/Vincenty.xlsm), [Vincenty.xlam](https://github.com/tdjastrzebski/VincentyExcel/raw/master/Vincenty.xlam) and [Vincenty.xls](https://github.com/tdjastrzebski/VincentyExcel/raw/master/Vincenty.xls) and [Vincenty.xla](https://github.com/tdjastrzebski/VincentyExcel/raw/master/Vincenty.xla) files for your convienience.
+Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** calculations as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion and uses WGS84 model. Functions are available in Excel [Vincenty.xlsm](../raw/master/Vincenty.xlsm), [Vincenty.xlam](../raw/master/Vincenty.xlam) and [Vincenty.xls](../raw/master/Vincenty.xls) and [Vincenty.xla](../raw/master/Vincenty.xla) files for your convienience.
 
-Source code for better change tracking has been placed separately in [Vincenty.bas](https://github.com/tdjastrzebski/VincentyExcel/blob/master/Vincenty.bas), [InvParams.cls](https://github.com/tdjastrzebski/VincentyExcel/blob/master/InvParams.cls), [DirParams.cls](https://github.com/tdjastrzebski/VincentyExcel/blob/master/DirParams.cls) files.
+Source code for better change tracking has been placed separately in [Vincenty.bas](../blob/master/Vincenty.bas), [InvParams.cls](../blob/master/InvParams.cls), [DirParams.cls](../blob/master/DirParams.cls) files.
 
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
 against **Geoscience Australia** website:
