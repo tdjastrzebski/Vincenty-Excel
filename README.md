@@ -1,9 +1,9 @@
 # Vincenty Direct and Inverse Solution of Geodesics on the Ellipsoid
 ## algorithms by Thaddeus Vincenty (1975)
 
-Based on the implementation in Java Script by © Chris Veness 2002-2017 MIT License  
-https://www.movable-type.co.uk/scripts/latlong-vincenty.html  
-https://github.com/chrisveness/geodesy
+> Based on the implementation in Java Script by © Chris Veness 2002-2017 MIT License  
+> https://www.movable-type.co.uk/scripts/latlong-vincenty.html  
+> https://github.com/chrisveness/geodesy
 
 To make the long story short, I was looking for a way to calculate coordinates, distance and azimuth in Excel.
 I checked several available solutions but they were either incomplete, did not work or results were inaccurate.
