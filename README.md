@@ -9,10 +9,9 @@ To make the long story short, I as looking for a way to calculate coordinates, d
 I checked several available solutions but they were either incomplete, did not work or results were inacurate.
 That is how I ended up developing my own, complete Vincenty Direct and Inverse formulae implementation.
 
-Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** calculations as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion and uses WGS84 model. Functions are available in Excel `Vincenty.xlsm`, `Vincenty.xlam` and `Vincenty.xls` and `Vincenty.xla` files for your convienience.
+Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** calculations as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion and uses WGS84 model. Functions are available in Excel [Vincenty.xlsm](https://github.com/tdjastrzebski/VincentyExcel/raw/master/Vincenty.xlsm), [Vincenty.xlam](https://github.com/tdjastrzebski/VincentyExcel/raw/master/Vincenty.xlam) and [Vincenty.xls](https://github.com/tdjastrzebski/VincentyExcel/raw/master/Vincenty.xls) and [Vincenty.xla](https://github.com/tdjastrzebski/VincentyExcel/raw/master/Vincenty.xla) files for your convienience.
 
-Source code for better change tracking has been placed separately in [Vincenty.bas](https://github.com/tdjastrzebski/VincentyExcel/blob/master/Vincenty.bas
-), [InvParams.cls](https://github.com/tdjastrzebski/VincentyExcel/blob/master/InvParams.cls), [DirParams.cls](https://github.com/tdjastrzebski/VincentyExcel/blob/master/DirParams.cls) files.
+Source code for better change tracking has been placed separately in [Vincenty.bas](https://github.com/tdjastrzebski/VincentyExcel/blob/master/Vincenty.bas), [InvParams.cls](https://github.com/tdjastrzebski/VincentyExcel/blob/master/InvParams.cls), [DirParams.cls](https://github.com/tdjastrzebski/VincentyExcel/blob/master/DirParams.cls) files.
 
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
 against **Geoscience Australia** website:
@@ -22,7 +21,7 @@ and **GeodSolve library** by Charles Karney:
 + https://geographiclib.sourceforge.io/cgi-bin/GeodSolve
 + https://geographiclib.sourceforge.io/scripts/geod-google.html
 + https://link.springer.com/article/10.1007%2Fs00190-012-0578-z  
-For complete results see **VincentTest.xlsm** file.
+For complete test results see **VincentTest.xlsm** file.
 
 References:
 + [Wikipedia, Vincenty's formulae](https://en.wikipedia.org/wiki/Vincenty%27s_formulae)
