@@ -1,4 +1,4 @@
-# Vincenty Direct and Inverse Solution of Geodesics on the Ellipsoid
+# Vincenty Direct and Inverse Solution of Geodesics on the Ellipsoid - Excel VBA implementation
 ## algorithms by Thaddeus Vincenty (1975)
 
 > Based on the implementation in Java Script by © Chris Veness 2002-2017 MIT License  
