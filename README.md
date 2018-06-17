@@ -44,7 +44,7 @@ and **GeodSolve library** by Charles Karney:
 + https://geographiclib.sourceforge.io/scripts/geod-google.html
 + https://link.springer.com/article/10.1007%2Fs00190-012-0578-z  
 
-##Validation results
+## Validation results
 
 &nbsp;|Geoscience Australia|GeodSolve Library
 -----|-----:|-----:
