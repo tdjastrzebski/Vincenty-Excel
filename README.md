@@ -29,7 +29,7 @@ Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds
 + `ConvertDecimal(degreeDeg As String) As Variant`  
 Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value
 
-Functions are available in Excel files:
+The above functions are available in Excel files:
 + [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook
 + [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
 + [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Add-in
