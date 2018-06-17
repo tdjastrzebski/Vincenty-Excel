@@ -5,13 +5,13 @@ Based on implementation in Java Script by © Chris Veness 2002-2017 MIT License
 https://www.movable-type.co.uk/scripts/latlong-vincenty.html  
 https://github.com/chrisveness/geodesy
 
-To make the long story short, I as looking for a way to calculate coordinates, distance and azimuth in Excel.
-I checked several available solutions but they were either incomplete, did not work or results were inacurate.
+To make the long story short, I was looking for a way to calculate coordinates, distance and azimuth in Excel.
+I checked several available solutions but they were either incomplete, did not work or results were inaccurate.
 That is how I ended up developing my own, complete Vincenty Direct and Inverse formulae implementation.
 
 Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** calculations as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion and uses WGS84 model. Functions are available in Excel files:
 + [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook
-+ [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excell Add-in
++ [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
 + [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Add-in
 + [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Workbook
 
@@ -38,9 +38,9 @@ VincentyInvRevAzimuth|0.0005245%|0.0003928%
 For complete test results refer to [VincentTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
 
 **References:**
-+ [Wikipedia, Vincenty's formulae](https://en.wikipedia.org/wiki/Vincenty%27s_formulae)
++ [Wikipedia: Vincenty's formulae](https://en.wikipedia.org/wiki/Vincenty%27s_formulae)
 + https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf
 + https://geographiclib.sourceforge.io/geodesic-papers/vincenty75b.pdf
-+ [Wikipedia, Geodesics on an ellipsoid](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid)
-+ [Wikipedia, Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance)
-+ [Wikipedia, Haversine formula](https://en.wikipedia.org/wiki/Haversine_formula)
++ [Wikipedia: Geodesics on an ellipsoid](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid)
++ [Wikipedia: Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance)
++ [Wikipedia: Haversine formula](https://en.wikipedia.org/wiki/Haversine_formula)
