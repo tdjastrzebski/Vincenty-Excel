@@ -11,10 +11,11 @@ That is how I ended up developing my own, complete Vincenty Direct and Inverse f
 
 Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** calculations as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion and uses WGS84 model. Functions are available in Excel `Vincenty.xlsm`, `Vincenty.xlam` and `Vincenty.xls` and `Vincenty.xla` files for your convienience.
 
-Source code for better change tracking has been placed separately in `Vincenty.bas`, `InvParams.cls`, `DirParams.cls` files.
+Source code for better change tracking has been placed separately in [Vincenty.bas](https://github.com/tdjastrzebski/VincentyExcel/blob/master/Vincenty.bas
+), [InvParams.cls](https://github.com/tdjastrzebski/VincentyExcel/blob/master/InvParams.cls), [DirParams.cls](https://github.com/tdjastrzebski/VincentyExcel/blob/master/DirParams.cls) files.
 
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
-against **Geoscience Australia** website:  
+against **Geoscience Australia** website:
 + http://www.ga.gov.au/geodesy/datums/vincenty_direct.jsp
 + http://www.ga.gov.au/geodesy/datums/vincenty_inverse.jsp  
 and **GeodSolve library** by Charles Karney:
