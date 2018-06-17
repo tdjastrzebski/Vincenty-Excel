@@ -26,14 +26,14 @@ and **GeodSolve library** by Charles Karney:
 + https://geographiclib.sourceforge.io/scripts/geod-google.html
 + https://link.springer.com/article/10.1007%2Fs00190-012-0578-z  
 
-A|Geoscience Australia|GeodSolve Library|
----|---:|---:
-VincentyDirLat       |0.0000005%          |0.0000000%
-VincentyDirLon       |0.0000002%          |0.0000001%
-VincentyDirRevAzimuth|0.0000833%          |0.0000000%
-VincentyInvDistance  |0.0024183%          |0.0001269%
-VincentyInvFwdAzimuth|0.0008098%          |0.0003928%
-VincentyInvRevAzimuth|0.0005245%          |0.0003928%
+ |Geoscience Australia|GeodSolve Library
+-----|-----|-----
+VincentyDirLat|0.0000005%|0.0000000%
+VincentyDirLon|0.0000002%|0.0000001%
+VincentyDirRevAzimuth|0.0000833%|0.0000000%
+VincentyInvDistance|0.0024183%|0.0001269%
+VincentyInvFwdAzimuth|0.0008098%|0.0003928%
+VincentyInvRevAzimuth|0.0005245%|0.0003928%
 
 For complete test results refer to [VincentTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
 
