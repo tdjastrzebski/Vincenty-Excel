@@ -9,7 +9,7 @@ Attribute VB_Name = "Vincenty"
 ' Ported to VBA by (c) Tomasz Jastrzebski 2018 MIT Licence
 ' https://github.com/tdjastrzebski/VincentyExcel
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-' Based on implementation by (c) Chris Veness 2002-2017 MIT Licence
+' Based on the implementation by (c) Chris Veness 2002-2017 MIT Licence
 ' https://www.movable-type.co.uk/scripts/latlong-vincenty.html
 ' https://github.com/chrisveness/geodesy
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -279,6 +279,7 @@ Private Function VincentyInv(ByVal lat1 As Double, ByVal lon1 As Double, ByVal l
     Set VincentyInv = p
 End Function
 
+' Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format
 Public Function ConvertDegrees(ByVal decimalDeg As Double) As String
 Attribute ConvertDegrees.VB_Description = "Converts latitude, longitude or azimuth in decimal degrees to string in degrees/minutes/seconds format"
 Attribute ConvertDegrees.VB_ProcData.VB_Invoke_Func = " \n20"
@@ -298,6 +299,7 @@ Attribute ConvertDegrees.VB_ProcData.VB_Invoke_Func = " \n20"
     ConvertDegrees = Trim(Str(degrees)) & "° " & Trim(Str(minutes)) & "' " & Format(seconds, "0.####") + Chr(34)
 End Function
 
+' Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value
 Public Function ConvertDecimal(degreeDeg As String) As Variant
 Attribute ConvertDecimal.VB_Description = "Converts latitude, longitude or azimuth in degrees/minutes/seconds format to decimal value"
 Attribute ConvertDecimal.VB_ProcData.VB_Invoke_Func = " \n20"
