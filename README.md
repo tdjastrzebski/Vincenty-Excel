@@ -9,7 +9,7 @@ To make the long story short, I as looking for a way to calculate coordinates, d
 I checked several available solutions but they were either incomplete, did not work or results were inacurate.
 That is how I ended up developing my own, complete Vincenty Direct and Inverse formulae implementation.
 
-Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** calculations as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion and uses WGS84 model. Functions are available in Excel [Vincenty.xlsm](../raw/master/Vincenty.xlsm), [Vincenty.xlam](../raw/master/Vincenty.xlam) and [Vincenty.xls](../raw/master/Vincenty.xls) and [Vincenty.xla](../raw/master/Vincenty.xla) files for your convienience.
+Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** calculations as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion and uses WGS84 model. Functions are available in Excel [Vincenty.xlsm](Vincenty.xlsm), [Vincenty.xlam](Vincenty.xlam) and [Vincenty.xls](Vincenty.xls) and [Vincenty.xla](Vincenty.xla) files for your convienience.
 
 Source code for better change tracking has been placed separately in [Vincenty.bas](../master/Vincenty.bas), [InvParams.cls](../master/InvParams.cls), [DirParams.cls](../master/DirParams.cls) files.
 
