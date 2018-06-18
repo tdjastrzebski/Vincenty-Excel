@@ -33,7 +33,7 @@ Converts latitude, longitude or azimuth string in degrees/minutes/seconds format
 + [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook
 + [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
 + [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Add-in
-+ [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Workbook
++ [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Workbook  
 **Note: there is no Intellisense available for VBA UDFs. Hwever, functions and their parameters are listed in function wizard under Geodesic category.**
 
 ### Source code
