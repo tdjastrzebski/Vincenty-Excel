@@ -12,6 +12,7 @@ That is how I ended up developing my own, complete Vincenty Direct and Inverse f
 
 Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** formulae as well as 2 functions for Decimal ↔ Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.
 
+## Implementation
 + `VincentyDirLat(lat As Double, lon As Double, azimuth As Double, distance As Double) As Variant`  
 Calculates geodesic latitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty direct formula for ellipsoids
 + `VincentyDirLon(lat As Double, lon As Double, azimuth As Double, distance As Double) As Variant`  
