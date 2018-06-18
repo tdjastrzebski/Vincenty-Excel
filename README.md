@@ -45,6 +45,7 @@ Calculation results have been validated using 1200 test cases generated for 6 ra
 against **Geoscience Australia** website:
 + http://www.ga.gov.au/geodesy/datums/vincenty_direct.jsp
 + http://www.ga.gov.au/geodesy/datums/vincenty_inverse.jsp  
+
 and **GeodSolve library** by Charles Karney:
 + https://geographiclib.sourceforge.io/cgi-bin/GeodSolve
 + https://geographiclib.sourceforge.io/scripts/geod-google.html
