@@ -8,7 +8,7 @@ or distance and azimuth based on two coordinates (inverse)**
 
 To make the long story short, I was looking for a way to calculate coordinates, distance and azimuth in Excel.
 I checked several available solutions but they were either incomplete, did not work or results were inaccurate.
-That is how I ended up developing my own, complete Vincenty Direct and Inverse formulae implementation.
+That is how I ended up developing my own, complete Vincenty's Direct and Inverse formulae implementation.
 
 ### Implementation
 Solution contains 6 functions implementing **Vincenty Direct** and **Vincenty Inverse** formulae as well as 2 functions for Decimal&nbsp;↔&nbsp;Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.
