@@ -38,7 +38,7 @@ Converts latitude, longitude or azimuth string in degrees/minutes/seconds format
 > Note: there is no IntelliSense available for VBA UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** category.
 
 ### Source code
-Excel workbooks contain unprotected source code. For better change tracking source code has been placed separately in [Vincenty.bas](Vincenty.bas), [InvParams.cls](InvParams.cls), [DirParams.cls](DirParams.cls) files.
+Excel workbooks contain unprotected source code. In addition, for better change tracking source code has been placed separately in [Vincenty.bas](Vincenty.bas), [InvParams.cls](InvParams.cls), [DirParams.cls](DirParams.cls) files.
 
 ### Validation
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
@@ -46,7 +46,7 @@ against **Geoscience Australia** website:
 + http://www.ga.gov.au/geodesy/datums/vincenty_direct.jsp
 + http://www.ga.gov.au/geodesy/datums/vincenty_inverse.jsp  
 
-and **GeodSolve library** by Charles Karney:
+and **GeodSolve Library** by Charles Karney:
 + https://geographiclib.sourceforge.io/cgi-bin/GeodSolve
 + https://geographiclib.sourceforge.io/scripts/geod-google.html
 + https://link.springer.com/article/10.1007%2Fs00190-012-0578-z  
