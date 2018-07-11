@@ -10,6 +10,14 @@ To make the long story short, I was looking for a way to calculate coordinates, 
 I checked several available solutions but they were either incomplete, did not work or results were inaccurate.
 That is how I ended up developing my own, complete Vincenty's Direct and Inverse formulae implementation.
 
+### Excel files
++ [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook
++ [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
++ [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Workbook
++ [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Add-in
+
+> Note: there is no IntelliSense available for VBA UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** category.
+
 ### Implementation
 Solution contains 6 functions implementing **Vincenty's Direct** and **Vincenty's Inverse** formulae as well as 2 functions for Decimal&nbsp;↔&nbsp;Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.
 
@@ -29,14 +37,6 @@ Calculates geodesic reverse azimuth (in degrees) between two points specified by
 Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format
 + `ConvertDecimal(degreeDeg As String) As Variant`  
 Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value
-
-### Excel files
-+ [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook
-+ [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
-+ [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Workbook
-+ [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Add-in
-
-> Note: there is no IntelliSense available for VBA UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** category.
 
 ### Source code
 Excel workbooks contain unprotected source code. In addition, for better change tracking source code has been placed separately in [Vincenty.bas](Vincenty.bas), [InvParams.cls](InvParams.cls), [DirParams.cls](DirParams.cls) files.
