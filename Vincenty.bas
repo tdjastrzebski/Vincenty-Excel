@@ -198,7 +198,6 @@ Private Function VincentyDir(ByVal lat As Double, ByVal lon As Double, ByVal azi
     If iterationCount >= MaxIterations Then
         ' failed to converge
         err.Raise (Excel.xlErrNA): Exit Function
-        Exit Function
     End If
         
     Set VincentyDir = p
