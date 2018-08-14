@@ -7,7 +7,7 @@ or distance and azimuth based on two coordinates (inverse)**
 > https://github.com/chrisveness/geodesy
 
 To make the long story short, I was looking for a way to calculate coordinates, distance and azimuth in Excel.
-I checked several available solutions but they were either incomplete, did not work or results were inaccurate.
+I checked out several available solutions but they were either incomplete, did not work or results were inaccurate.
 That is how I ended up developing my own, complete Vincenty's Direct and Inverse formulae implementation.
 
 ### Excel files
