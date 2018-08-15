@@ -401,7 +401,7 @@ Private Function Atan2(ByVal x As Double, ByVal Y As Double) As Double
     End If
 End Function
 
-Public Sub Auto_Open()
+Public Sub Workbook_Open()
     Application.MacroOptions Macro:="VincentyDirLat", Description:="Calculates geodesic latitude (in degrees) based on one point, azimuth and distance using Vincenty's direct formula for ellipsoids", _
     ArgumentDescriptions:=Array("latitude in degrees", "longitude in degrees", "azimuth in degrees", "distance in meters"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/VincentyExcel"
     
