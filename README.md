@@ -63,7 +63,7 @@ VincentyInvDistance()|0.0024183%|0.0001269%
 VincentyInvFwdAzimuth()|0.0008098%|0.0003928%
 VincentyInvRevAzimuth()|0.0005245%|0.0003928%
 
-For complete test results refer to [VincentTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
+For complete test results refer to [VincentyTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
 
 ### References
 
