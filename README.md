@@ -13,8 +13,8 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 ### Excel files
 + [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook (demo)
 + [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
-+ [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Workbook (demo)
-+ [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Add-in
++ [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Workbook (demo)
++ [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Add-in
 
 > Note: there is no IntelliSense available for VBA UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** category.
 
