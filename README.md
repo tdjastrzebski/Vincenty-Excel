@@ -73,3 +73,7 @@ For complete test results refer to [VincentyTest.xlsm](../../raw/master/Vincenty
 + [Wikipedia: Geodesics on an ellipsoid](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid)
 + [Wikipedia: Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance)
 + [Wikipedia: Haversine formula](https://en.wikipedia.org/wiki/Haversine_formula)
+
+### Feedback
+
+Do not hesitate to rate this repo and/or to leave a comments/suggestions if you find this work useful.
