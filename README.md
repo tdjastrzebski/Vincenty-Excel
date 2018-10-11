@@ -76,4 +76,4 @@ For complete test results refer to [VincentyTest.xlsm](../../raw/master/Vincenty
 
 ### Feedback
 
-Do not hesitate to rate this repo and/or to leave a comments/suggestions if you find this work useful.
+Do not hesitate to rate this repo and/or leave comments/suggestions if you find my work useful.
