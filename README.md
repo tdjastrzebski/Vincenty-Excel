@@ -11,10 +11,10 @@ I checked out several available solutions but they were either incomplete, did n
 That is how I ended up developing my own, complete Vincenty's Direct and Inverse formulae implementation.
 
 ### Excel files
-+ [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook
++ [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook (demo)
 + [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
-+ [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Workbook
-+ [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Add-in
++ [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Workbook (demo)
++ [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Add-in
 
 > Note: there is no IntelliSense available for VBA UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** category.
 
@@ -73,3 +73,7 @@ For complete test results refer to [VincentyTest.xlsm](../../raw/master/Vincenty
 + [Wikipedia: Geodesics on an ellipsoid](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid)
 + [Wikipedia: Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance)
 + [Wikipedia: Haversine formula](https://en.wikipedia.org/wiki/Haversine_formula)
+
+### Feedback
+
+Do not hesitate to rate this repo and/or leave comments/suggestions if you find my work useful.
