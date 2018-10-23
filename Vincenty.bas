@@ -295,7 +295,7 @@ Attribute ConvertDegrees.VB_ProcData.VB_Invoke_Func = " \n20"
         End If
     End If
     
-    ConvertDegrees = Trim(Str(degrees)) & "° " & Trim(Str(minutes)) & "' " & Format(seconds, "0.####") + Chr(34)
+    ConvertDegrees = Trim$(Str$(degrees)) & "° " & Trim$(Str$(minutes)) & "' " & Trim$(Str$(seconds)) + Chr(34)
 End Function
 
 ' Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value
@@ -308,8 +308,8 @@ Attribute ConvertDecimal.VB_ProcData.VB_Invoke_Func = " \n20"
     degreeDeg = Replace$(degreeDeg, "''", " ") ' double quote
     degreeDeg = Replace$(degreeDeg, """", " ") ' double quote
     degreeDeg = Replace$(degreeDeg, "'", " ") ' single quote
-    degreeDeg = Replace$(degreeDeg, "°", " ")
-    degreeDeg = Replace$(degreeDeg, "ø", " ")
+    degreeDeg = Replace$(degreeDeg, "°", " ") ' ordinal indicator
+    degreeDeg = Replace$(degreeDeg, Chr(248), " ") ' degree symbol
     degreeDeg = Replace$(degreeDeg, ":", " ")
     degreeDeg = Replace$(degreeDeg, "*", " ")
     degreeDeg = Trim$(degreeDeg)
