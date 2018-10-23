@@ -16,7 +16,9 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 + [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Workbook (demo)
 + [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Add-in
 
-> Note: there is no IntelliSense available for VBA UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** category.
+> Note:
+> + There is no IntelliSense available for VBA UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** or **User Defined** category.
+> + Axcel Add-in must be placed in directory registered as "Trusted Location". See [Add, remove, or change a trusted location](https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4) for more details. Demo workbook does not require Add-in.
 
 ### Implementation
 Solution contains 6 functions implementing **Vincenty's Direct** and **Vincenty's Inverse** formulae as well as 2 functions for Decimal&nbsp;↔&nbsp;Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.
