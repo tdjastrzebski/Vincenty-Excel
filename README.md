@@ -69,8 +69,8 @@ For complete test results refer to [VincentyTest.xlsm](../../raw/master/Vincenty
 ### References
 
 + [Wikipedia: Vincenty's formulae](https://en.wikipedia.org/wiki/Vincenty%27s_formulae)
-+ https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf
-+ https://geographiclib.sourceforge.io/geodesic-papers/vincenty75b.pdf
++ [Thaddeus Vincenty: original publication (1)](https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf)
++ [Thaddeus Vincenty: orginal publication (2)](https://geographiclib.sourceforge.io/geodesic-papers/vincenty75b.pdf)
 + [Wikipedia: Geodesics on an ellipsoid](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid)
 + [Wikipedia: Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance)
 + [Wikipedia: Haversine formula](https://en.wikipedia.org/wiki/Haversine_formula)
