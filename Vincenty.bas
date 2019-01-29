@@ -24,12 +24,38 @@ Private Const low_b As Double = 6356752.3142
 Private Const f As Double = 1 / 298.257223563
 Private Const MaxIterations As Integer = 20
 
+Private Type DirParams
+    sinU1 As Double
+    cosU1 As Double
+    sigma As Double
+    sinSigma As Double
+    cosSigma As Double
+    cosAlpha1 As Double
+    cosSqAlpha As Double
+    cos2sigmaM As Double
+    sinAlpha As Double
+    sinAlpha1 As Double
+    lambda1 As Double
+End Type
+
+Private Type InvParams
+    upper_A As Double
+    sigma As Double
+    deltaSigma As Double
+    sinU1 As Double
+    cosU1 As Double
+    sinU2 As Double
+    cosU2 As Double
+    cosLambda As Double
+    sinLambda As Double
+End Type
+
 ' Calculates geodesic latitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids
 Public Function VincentyDirLat(ByVal lat As Double, ByVal lon As Double, ByVal azimuth As Double, ByVal distance As Double) As Variant
 Attribute VincentyDirLat.VB_Description = "Calculates geodesic latitude (in degrees) based on one point, azimuth and distance using Vincenty's direct formula for ellipsoids"
 Attribute VincentyDirLat.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
-    Dim p As DirParams: Set p = VincentyDir(lat, lon, azimuth, distance)
+    Dim p As DirParams: p = VincentyDir(lat, lon, azimuth, distance)
     
     Dim x As Double: x = p.sinU1 * p.sinSigma - p.cosU1 * p.cosSigma * p.cosAlpha1
     Dim phi2 As Double: phi2 = Atan2((1 - f) * Sqr(p.sinAlpha * p.sinAlpha + x * x), p.sinU1 * p.cosSigma + p.cosU1 * p.sinSigma * p.cosAlpha1)
@@ -49,7 +75,7 @@ Public Function VincentyDirLon(ByVal lat As Double, ByVal lon As Double, ByVal a
 Attribute VincentyDirLon.VB_Description = "Calculates geodesic longitude (in degrees) based on one point, azimuth and distance using Vincenty's direct formula for ellipsoids"
 Attribute VincentyDirLon.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
-    Dim p As DirParams: Set p = VincentyDir(lat, lon, azimuth, distance)
+    Dim p As DirParams: p = VincentyDir(lat, lon, azimuth, distance)
     
     Dim lambda As Double: lambda = Atan2(p.cosU1 * p.cosSigma - p.sinU1 * p.sinSigma * p.cosAlpha1, p.sinSigma * p.sinAlpha1)
     Dim c As Double: c = f / 16 * p.cosSqAlpha * (4 + f * (4 - 3 * p.cosSqAlpha))
@@ -61,8 +87,7 @@ Attribute VincentyDirLon.VB_ProcData.VB_Invoke_Func = " \n20"
     If lambda2 = PI Then
         VincentyDirLon = 180
     Else
-        lambda2 = ModDouble(lambda2 + 3 * PI, 2 * PI) - PI ' normalise to -180..+180
-        VincentyDirLon = ToDegrees(lambda2)
+        VincentyDirLon = NormalizeLon(ToDegrees(lambda2))
     End If
     
     Exit Function
@@ -79,12 +104,11 @@ Public Function VincentyDirRevAzimuth(ByVal lat As Double, ByVal lon As Double, 
 Attribute VincentyDirRevAzimuth.VB_Description = "Calculates geodesic azimuth in degrees clockwise from north based on one point, azimuth and distance using Vincenty's direct formula for ellipsoids"
 Attribute VincentyDirRevAzimuth.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
-    Dim p As DirParams: Set p = VincentyDir(lat, lon, azimuth, distance)
+    Dim p As DirParams: p = VincentyDir(lat, lon, azimuth, distance)
     
     Dim x As Double: x = p.sinU1 * p.sinSigma - p.cosU1 * p.cosSigma * p.cosAlpha1
     Dim alpha2 As Double: alpha2 = Atan2(-x, p.sinAlpha)
-    alpha2 = ModDouble(alpha2 + 2 * PI, 2 * PI) ' normalise to 0..360
-    VincentyDirRevAzimuth = ToDegrees(alpha2)
+    VincentyDirRevAzimuth = NormalizeAzimuth(ToDegrees(alpha2), True)
     Exit Function
 error:
 If err.number = Excel.xlErrNA Then
@@ -99,7 +123,7 @@ Public Function VincentyInvDistance(ByVal lat1 As Double, ByVal lon1 As Double, 
 Attribute VincentyInvDistance.VB_Description = "Calculates geodesic distance in meters between two points specified by latitude/longitude using Vincenty's inverse formula for ellipsoids"
 Attribute VincentyInvDistance.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
-    Dim p As InvParams: Set p = VincentyInv(lat1, lon1, lat2, lon2)
+    Dim p As InvParams: p = VincentyInv(lat1, lon1, lat2, lon2)
     VincentyInvDistance = low_b * p.upper_A * (p.sigma - p.deltaSigma)
     Exit Function
 error:
@@ -117,10 +141,9 @@ Public Function VincentyInvFwdAzimuth(ByVal lat1 As Double, ByVal lon1 As Double
 Attribute VincentyInvFwdAzimuth.VB_Description = "Calculates geodesic forward azimuth in degrees clockwise from north between two points specified by latitude/longitude using Vincenty's inverse formula for ellipsoids"
 Attribute VincentyInvFwdAzimuth.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
-    Dim p As InvParams: Set p = VincentyInv(lat1, lon1, lat2, lon2)
+    Dim p As InvParams: p = VincentyInv(lat1, lon1, lat2, lon2)
     Dim fwdAz As Double: fwdAz = Atan2(p.cosU1 * p.sinU2 - p.sinU1 * p.cosU2 * p.cosLambda, p.cosU2 * p.sinLambda)
-    VincentyInvFwdAzimuth = ToDegrees(fwdAz)
-    If VincentyInvFwdAzimuth < 0 Then VincentyInvFwdAzimuth = VincentyInvFwdAzimuth + 360
+    VincentyInvFwdAzimuth = NormalizeAzimuth(ToDegrees(fwdAz), True)
     Exit Function
 error:
 If err.number = Excel.xlErrDiv0 Then
@@ -137,10 +160,9 @@ Public Function VincentyInvRevAzimuth(ByVal lat1 As Double, ByVal lon1 As Double
 Attribute VincentyInvRevAzimuth.VB_Description = "Calculates geodesic reverse azimuth in degrees clockwise from north between two points specified by latitude/longitude using Vincenty's inverse formula for ellipsoids"
 Attribute VincentyInvRevAzimuth.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
-    Dim p As InvParams: Set p = VincentyInv(lat1, lon1, lat2, lon2)
+    Dim p As InvParams: p = VincentyInv(lat1, lon1, lat2, lon2)
     Dim revAz As Double: revAz = Atan2(-p.sinU1 * p.cosU2 + p.cosU1 * p.sinU2 * p.cosLambda, p.cosU1 * p.sinLambda)
-    VincentyInvRevAzimuth = ToDegrees(revAz)
-    If VincentyInvRevAzimuth < 0 Then VincentyInvRevAzimuth = VincentyInvRevAzimuth + 360
+    VincentyInvRevAzimuth = NormalizeAzimuth(ToDegrees(revAz), True)
     Exit Function
 error:
 If err.number = Excel.xlErrDiv0 Then
@@ -153,7 +175,7 @@ End If
 End Function
 
 Private Function VincentyDir(ByVal lat As Double, ByVal lon As Double, ByVal azimuth As Double, ByVal distance As Double) As DirParams
-    Dim p As DirParams: Set p = New DirParams
+    Dim p As DirParams
     
     Dim phi1 As Double: phi1 = ToRadians(lat)
     p.lambda1 = ToRadians(lon)
@@ -200,11 +222,11 @@ Private Function VincentyDir(ByVal lat As Double, ByVal lon As Double, ByVal azi
         err.Raise (Excel.xlErrNA): Exit Function
     End If
         
-    Set VincentyDir = p
+    VincentyDir = p
 End Function
 
 Private Function VincentyInv(ByVal lat1 As Double, ByVal lon1 As Double, ByVal lat2 As Double, ByVal lon2 As Double) As InvParams
-    Dim p As InvParams: Set p = New InvParams
+    Dim p As InvParams
 
     Dim l As Double: l = ToRadians(lon2 - lon1)
     Dim U1 As Double: U1 = Atn((1 - f) * Tan(ToRadians(lat1)))
@@ -275,27 +297,50 @@ Private Function VincentyInv(ByVal lat1 As Double, ByVal lon1 As Double, ByVal l
     
     p.deltaSigma = upper_B * sinSigma * (cos2sigmaM + upper_B / 4 * (fix1 - upper_B / fix2))
     
-    Set VincentyInv = p
+    VincentyInv = p
 End Function
 
 ' Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format
-Public Function ConvertDegrees(ByVal decimalDeg As Double) As String
+Public Function ConvertDegrees(ByVal decimalDeg As Double, Optional isLongitude As Variant) As String
 Attribute ConvertDegrees.VB_Description = "Converts latitude, longitude or azimuth in decimal degrees to string in degrees/minutes/seconds format"
 Attribute ConvertDegrees.VB_ProcData.VB_Invoke_Func = " \n20"
-    Dim s As Integer: s = Sign(decimalDeg)
-    Dim degrees As Double: degrees = Fix(decimalDeg)
-    Dim minutes As Double: minutes = Fix((decimalDeg - degrees) * 60)
-    Dim seconds As Double: seconds = Round((decimalDeg - degrees - (minutes / 60)) * 60 * 60, 4) ' 4 digit precision corresponds to ~3mm
-    
-    If s < 0 Then
-        If degrees <> 0 Then
-            minutes = minutes * s: seconds = seconds * s
-        ElseIf minutes <> 0 Then
-            seconds = seconds * s
-        End If
+    If Not IsMissing(isLongitude) And CBool(isLongitude) Then
+        decimalDeg = NormalizeLon(decimalDeg)
+    ElseIf Not IsMissing(isLongitude) And Not CBool(isLongitude) Then
+        decimalDeg = NormalizeLat(decimalDeg)
+    Else
+        decimalDeg = NormalizeAzimuth(decimalDeg, False)
     End If
     
-    ConvertDegrees = Trim$(Str$(degrees)) & "° " & Trim$(Str$(minutes)) & "' " & Trim$(Str$(seconds)) + Chr(34)
+    Dim s As Integer: s = sign(decimalDeg)
+    decimalDeg = Abs(decimalDeg)
+    Dim degrees As Integer: degrees = Fix(decimalDeg)
+    Dim minutes As Integer: minutes = Fix((decimalDeg - degrees) * 60)
+    Dim seconds As Double: seconds = Round((decimalDeg - degrees - (minutes / 60)) * 60 * 60, 4) ' 4 digit precision corresponds to ~3mm
+            
+    If Not IsMissing(isLongitude) And Not CBool(isLongitude) Then
+        ConvertDegrees = Format$(degrees, "00") & "°" & Format$(minutes, "00") & "'" & Format$(seconds, "00.0000") + Chr(34)
+    Else
+        ConvertDegrees = Format$(degrees, "000") & "°" & Format$(minutes, "00") & "'" & Format$(seconds, "00.0000") + Chr(34)
+    End If
+    
+    If decimalDeg = 0 Then
+        ' no nothing
+    ElseIf IsMissing(isLongitude) Then
+        If s = -1 Then ConvertDegrees = "-" + ConvertDegrees
+    ElseIf isLongitude Then
+        If s = 1 Then
+            ConvertDegrees = ConvertDegrees + "E"
+        ElseIf s = -1 Then
+            ConvertDegrees = ConvertDegrees + "W"
+        End If
+    Else
+        If s = 1 Then
+            ConvertDegrees = ConvertDegrees + "N"
+        ElseIf s = -1 Then
+            ConvertDegrees = ConvertDegrees + "S"
+        End If
+    End If
 End Function
 
 ' Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value
@@ -359,14 +404,14 @@ Attribute ConvertDecimal.VB_ProcData.VB_Invoke_Func = " \n20"
     Dim minutes As Double: If l > 0 Then minutes = val(a(1)): minutes = minutes / 60
     Dim seconds As Double: If l > 1 Then seconds = val(a(2)): seconds = seconds / 3600
     
-    ConvertDecimal = (degrees + (Sign(degrees) * minutes) + (Sign(degrees) * Sign(minutes) * seconds)) * s
+    ConvertDecimal = (degrees + (sign(degrees) * minutes) + (sign(degrees) * sign(minutes) * seconds)) * s
     Exit Function
 error:
     ConvertDecimal = CVErr(Excel.xlErrNA)
 End Function
 
-Private Function Sign(val As Double) As Integer
-    Sign = IIf(val >= 0, 1, -1)
+Private Function sign(val As Double) As Integer
+    sign = IIf(val >= 0, 1, -1)
 End Function
 
 Private Function ToRadians(ByVal degrees As Double) As Double
@@ -377,8 +422,32 @@ Private Function ToDegrees(ByVal radians As Double) As Double
     ToDegrees = (radians * 180) / PI
 End Function
 
-Private Function ModDouble(ByVal number As Double, ByVal divisor As Double) As Double
-    ModDouble = number - (divisor * Fix(number / divisor))
+Public Function ModDouble(ByVal dividend As Double, ByVal divisor As Double, Optional sameSignAsDivisor As Boolean = False) As Double
+    ' http://en.wikipedia.org/wiki/Modulo_operation
+    If sameSignAsDivisor Then
+        ModDouble = dividend - (divisor * Int(dividend / divisor))
+    Else
+        ModDouble = dividend - (divisor * Fix(dividend / divisor))
+    End If
+    
+    ' this function can only be accurate when (a / b) is outside [-2.22E-16,+2.22E-16]
+    ' without this correction, ModDouble(.66, .06) = 5.55111512312578E-17 when it should be 0
+    ' http://en.wikipedia.org/wiki/Machine_epsilon
+    If ModDouble >= -2 ^ -52 And ModDouble <= 2 ^ -52 Then '+/- 2.22E-16
+        ModDouble = 0
+    End If
+End Function
+
+Private Function NormalizeLat(ByVal lat As Double) As Double
+    NormalizeLat = Abs(ModDouble(lat - 90, 360, True) - 180) - 90
+End Function
+
+Private Function NormalizeLon(ByVal lon As Double) As Double
+    NormalizeLon = 2 * ModDouble((lon / 2) + 90, 180, True) - 180
+End Function
+
+Private Function NormalizeAzimuth(ByVal azimuth As Double, Optional positiveOnly As Boolean = False) As Double
+    NormalizeAzimuth = ModDouble(azimuth, 360, positiveOnly)
 End Function
 
 ' source: http://en.wikibooks.org/wiki/Programming:Visual_Basic_Classic/Simple_Arithmetic#Trigonometrical_Functions
@@ -425,6 +494,5 @@ Public Sub Workbook_Open()
     ArgumentDescriptions:=Array("string in degrees/minutes/seconds format"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/VincentyExcel"
     
     Application.MacroOptions Macro:="ConvertDegrees", Description:="Converts latitude, longitude or azimuth in decimal degrees to string in degrees/minutes/seconds format", _
-    ArgumentDescriptions:=Array("decimal degrees"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/VincentyExcel"
+    ArgumentDescriptions:=Array("decimal degrees", "optional: longitude (true) or latitude (false)"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/VincentyExcel"
 End Sub
-
