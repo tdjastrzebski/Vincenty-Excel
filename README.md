@@ -40,7 +40,7 @@ Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds
 Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value.
 
 ### Source code
-Excel workbooks contain unprotected source code. In addition, for better change tracking source code has been placed separately in [Vincenty.bas](Vincenty.bas), [InvParams.cls](InvParams.cls), [DirParams.cls](DirParams.cls) files.
+Excel workbooks contain unprotected source code. In addition, for better change tracking source code has been placed separately in [Vincenty.bas](Vincenty.bas) file.
 
 ### Validation
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
