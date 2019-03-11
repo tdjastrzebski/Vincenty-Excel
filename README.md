@@ -10,8 +10,8 @@ To make the long story short, I was looking for a way to calculate coordinates, 
 I checked out several available solutions but they were either incomplete, did not work or results were inaccurate.
 That is how I ended up developing my own, complete Vincenty's Direct and Inverse formulae implementation.
 
-### Excel files
-+ [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook (demo)
+## Excel files
++ [Vincenty.xlsm](Vincenty.xlsm) - Excel Macro-Enabled Workbook (demo)
 + [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
 + [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Workbook (demo)
 + [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Add-in
@@ -19,7 +19,7 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 > + There is no IntelliSense available for VBA UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** or **User Defined** category.
 > + Excel Add-in must be placed in a directory registered as "Trusted Location". See [Add, remove, or change a trusted location](https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4) for more details. Demo workbook does not require Add-in.
 
-### Implementation
+## Implementation
 Solution contains 6 functions implementing **Vincenty's Direct** and **Vincenty's Inverse** formulae as well as 2 functions for Decimal&nbsp;↔&nbsp;Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.
 
 + `VincentyDirLat(lat As Double, lon As Double, azimuth As Double, distance As Double) As Variant`
@@ -39,10 +39,10 @@ Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds
 + `ConvertDecimal(degreeDeg As String) As Variant`
 Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value.
 
-### Source code
+## Source code
 Excel workbooks contain unprotected source code. In addition, for better change tracking source code has been placed separately in [Vincenty.bas](Vincenty.bas) file.
 
-### Validation
+## Validation
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
 against **Geoscience Australia** website:
 + http://www.ga.gov.au/geodesy/datums/vincenty_direct.jsp
@@ -53,7 +53,7 @@ and **GeodSolve Library** by Charles Karney:
 + https://geographiclib.sourceforge.io/scripts/geod-google.html
 + https://link.springer.com/article/10.1007%2Fs00190-012-0578-z  
 
-### Validation results - maximum deviation
+## Validation results - maximum deviation
 
 &nbsp;|Geoscience Australia|GeodSolve Library
 -----|-----:|-----:
@@ -66,7 +66,7 @@ VincentyInvRevAzimuth()|0.0005245%|0.0003928%
 
 For complete test results refer to [VincentyTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
 
-### References
+## References
 
 + [Wikipedia: Vincenty's formulae](https://en.wikipedia.org/wiki/Vincenty%27s_formulae)
 + [Thaddeus Vincenty: original publication (1)](https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf)
@@ -75,6 +75,6 @@ For complete test results refer to [VincentyTest.xlsm](../../raw/master/Vincenty
 + [Wikipedia: Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance)
 + [Wikipedia: Haversine formula](https://en.wikipedia.org/wiki/Haversine_formula)
 
-### Feedback
+## Feedback
 
 Do not hesitate to rate this repo and/or leave comments/suggestions if you find my work useful.
