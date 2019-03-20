@@ -10,6 +10,8 @@ To make the long story short, I was looking for a way to calculate coordinates, 
 I checked out several available solutions but they were either incomplete, did not work or results were inaccurate.
 That is how I ended up developing my own, complete Vincenty's Direct and Inverse formulae implementation.
 
+![Excel screenshot](ExcelScreenshot.png)
+
 ## Excel files
 + [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook (demo)
 + [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
