@@ -39,7 +39,7 @@ Calculates geodesic reverse azimuth (in degrees) between two points specified by
 + `ConvertDegrees(decimalDeg As Double, optional isLongitude as Variant) As String`
 Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format. If isLongitude value is privided output will be formatted as either longitude (true) or latitude (false).
 + `ConvertDecimal(degreeDeg As String) As Variant`
-Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value.
+Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value. This function has been designed to handle several typical formats.
 
 ## Source code
 Excel workbooks contain unprotected source code. In addition, for better change tracking source code has been placed separately in [Vincenty.bas](Vincenty.bas) file. This file is all what is required to add implemented functions to any other Excel workbook.
