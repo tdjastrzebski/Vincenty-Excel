@@ -6,8 +6,11 @@ Attribute VB_Name = "Vincenty"
 ' https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf
 ' https://geographiclib.sourceforge.io/geodesic-papers/vincenty75b.pdf
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-' Ported to VBA by (c) Tomasz Jastrzebski 2018 MIT Licence
+' Ported to VBA by (c) Tomasz Jastrzebski 2018-2019 MIT Licence
 ' https://github.com/tdjastrzebski/VincentyExcel
+' Latest version available at:
+' https://github.com/tdjastrzebski/Vincenty-Excel
+' Version: 2019-03-22
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ' Based on the implementation by Chris Veness
 ' https://www.movable-type.co.uk/scripts/latlong-vincenty.html
