@@ -37,12 +37,12 @@ Calculates geodesic azimuth (in degrees) between two points specified by latitud
 + `VincentyInvRevAzimuth(lat1 As Double, lon1 As Double, lat2 As Double, lon2 As Double) As Variant`
 Calculates geodesic reverse azimuth (in degrees) between two points specified by latitude/longitude (in numeric degrees) using Vincenty's inverse formula for ellipsoids.
 + `ConvertDegrees(decimalDeg As Double, optional isLongitude as Variant) As String`
-Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format. If isLongitude value is privided output will be formatted as either longitude (true) or latitude (false).
+Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format. If isLongitude value is provided output will be formatted as either longitude (true) or latitude (false).
 + `ConvertDecimal(degreeDeg As String) As Variant`
 Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value. This function has been designed to handle typical formats.
 
 ## Source code
-Excel workbooks contain unprotected source code. In addition, for better change tracking source code has been placed separately in [Vincenty.bas](Vincenty.bas) file. This file is all what is required to add implemented functions to any other Excel workbook.
+Excel workbooks contain unprotected source code. In addition, for better change tracking, source code has been placed separately in [Vincenty.bas](Vincenty.bas) file. This file is all what is required to add implemented functions to any other Excel workbook.
 
 ## Validation
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
