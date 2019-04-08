@@ -24,29 +24,29 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 ## Implementation
 Solution contains 6 functions implementing **Vincenty's Direct** and **Vincenty's Inverse** formulae as well as 2 functions for Decimal&nbsp;↔&nbsp;Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.
 
-+ `VincentyDirLat(lat as Double, lon as Double, azimuth as Double, distance as Double) as Variant`
++ `VincentyDirLat(lat as Double, lon as Double, azimuth as Double, distance as Double) as Variant` 
 Calculates geodesic latitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids.
-+ `VincentyDirLon(lat as Double, lon as Double, azimuth as Double, distance as Double) as Variant`
++ `VincentyDirLon(lat as Double, lon as Double, azimuth as Double, distance as Double) as Variant` 
 Calculates geodesic longitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids.
-+ `VincentyDirRevAzimuth(lat as Double, lon as Double, azimuth as Double, distance as Double, [returnAzimuth as Boolean = False]) as Variant`
++ `VincentyDirRevAzimuth(lat as Double, lon as Double, azimuth as Double, distance as Double, [returnAzimuth as Boolean = False]) as Variant` 
 Calculates geodesic reverse azimuth (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids.
 Note: by default aziumuth from point 1 to point 2 at point 2 is returned. To obtain azimuth from point 2 to point 1 pass `returnAzimuth = true`.
-+ `VincentyInvDistance(lat1 as Double, lon1 as Double, lat2 as Double, lon2 as Double) as Variant`
++ `VincentyInvDistance(lat1 as Double, lon1 as Double, lat2 as Double, lon2 as Double) as Variant` 
 Calculates geodesic distance (in m) between two points specified by latitude/longitude (in numeric degrees) using Vincenty's inverse formula for ellipsoids.
-+ `VincentyInvFwdAzimuth(lat1 as Double, lon1 as Double, lat2 as Double, lon2 as Double, [returnAzimuth as Boolean = False]) as Variant`
++ `VincentyInvFwdAzimuth(lat1 as Double, lon1 as Double, lat2 as Double, lon2 as Double, [returnAzimuth as Boolean = False]) as Variant` 
 Calculates geodesic azimuth (in degrees) between two points specified by latitude/longitude (in numeric degrees) using Vincenty's inverse formula for ellipsoids.
-+ `VincentyInvRevAzimuth(lat1 as Double, lon1 as Double, lat2 as Double, lon2 as Double) as Variant`
++ `VincentyInvRevAzimuth(lat1 as Double, lon1 as Double, lat2 as Double, lon2 as Double) as Variant` 
 Calculates geodesic reverse azimuth (in degrees) between two points specified by latitude/longitude (in numeric degrees) using Vincenty's inverse formula for ellipsoids.
 Note: by default aziumuth from point 1 to point 2 at point 2 is returned. To obtain azimuth from point 2 to point 1 pass `returnAzimuth = true`.
-+ `ConvertDegrees(decimalDeg as Double, optional isLongitude as Variant) as String`
++ `ConvertDegrees(decimalDeg as Double, optional isLongitude as Variant) as String` 
 Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format. If isLongitude value is privided output will be formatted as either longitude (true) or latitude (false).
-+ `ConvertDecimal(degreeDeg as String) as Variant`
++ `ConvertDecimal(degreeDeg as String) as Variant` 
 Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value. This function has been designed to handle typical formats.
-+ `NormalizeLat(lat as Double) as Double`
++ `NormalizeLat(lat as Double) as Double` 
 Normalizes latitude to -90..+90 range.
-+ `NormalizeLon(lon as Double) as Double`
++ `NormalizeLon(lon as Double) as Double` 
 Normalizes longitude to -180..+180 range.
-+ `NormalizeAzimuth(azimuth as Double, [positiveOnly as Boolean = False]) as Double`
++ `NormalizeAzimuth(azimuth as Double, [positiveOnly as Boolean = False]) as Double` 
 Normalizes azimuth to 0..360 range. Note: by default input and return values have the same sign.
 
 ## Source code
