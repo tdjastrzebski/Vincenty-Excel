@@ -41,7 +41,7 @@ Note: by default aziumuth from point 1 to point 2 at point 2 is returned. To obt
 + `ConvertDegrees(decimalDeg as Double, optional isLongitude as Variant) as String`
 Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format. If isLongitude value is privided output will be formatted as either longitude (true) or latitude (false).
 + `ConvertDecimal(degreeDeg as String) as Variant`
-Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value.
+Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value. This function has been designed to handle typical formats.
 + `NormalizeLat(lat as Double) as Double`
 Normalizes latitude to -90..+90 range.
 + `NormalizeLon(lon as Double) as Double`
@@ -50,7 +50,7 @@ Normalizes longitude to -180..+180 range.
 Normalizes azimuth to 0..360 range. Note: by default input and return values have the same sign.
 
 ## Source code
-Excel workbooks contain unprotected source code. In addition, for better change tracking source code has been placed separately in [Vincenty.bas](Vincenty.bas) file.
+Excel workbooks contain unprotected source code. In addition, for better change tracking, source code has been placed separately in [Vincenty.bas](Vincenty.bas) file. This file is all what is required to add implemented functions to any other Excel workbook.
 
 ## Validation
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
