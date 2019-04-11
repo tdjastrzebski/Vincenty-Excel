@@ -47,7 +47,7 @@ Normalizes latitude to -90..+90 range.
 + `NormalizeLon(lon as Double) as Double` 
 Normalizes longitude to -180..+180 range.
 + `NormalizeAzimuth(azimuth as Double, [positiveOnly as Boolean = False]) as Double` 
-Normalizes azimuth to 0..360 range. Note: by default input and return values have the same sign.
+Normalizes azimuth to 0..360 range. **Note**: by default input and return values have the same sign.
 
 ## Source code
 Excel workbooks contain unprotected source code. In addition, for better change tracking, source code has been placed separately in [Vincenty.bas](Vincenty.bas) file. This file is all what is required to add implemented functions to any other Excel workbook.
