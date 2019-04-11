@@ -41,7 +41,7 @@ Calculates geodesic reverse azimuth (in degrees) between two points specified by
 + `ConvertDegrees(decimalDeg as Double, optional isLongitude as Variant) as String` 
 Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format. If isLongitude value is privided output will be formatted as either longitude (true) or latitude (false).
 + `ConvertDecimal(degreeDeg as String) as Variant` 
-Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value. This function has been designed to handle typical formats.
+Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value. This function has been designed to parse typical formats.
 + `NormalizeLat(lat as Double) as Double` 
 Normalizes latitude to -90..+90 range.
 + `NormalizeLon(lon as Double) as Double` 
