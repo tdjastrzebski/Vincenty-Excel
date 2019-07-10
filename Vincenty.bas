@@ -10,9 +10,9 @@ Attribute VB_Name = "Vincenty"
 ' https://github.com/tdjastrzebski/VincentyExcel
 ' Latest version available at:
 ' https://github.com/tdjastrzebski/Vincenty-Excel
-' Version: 2019-06-25
+' Version: 2019-07-10
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-' Based on the implementation by Chris Veness
+' Based on the implementation by Chris Veness, ver 2.2.0
 ' https://www.movable-type.co.uk/scripts/latlong-vincenty.html
 ' https://github.com/chrisveness/geodesy
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -21,7 +21,7 @@ Option Explicit
 
 Private Const PI = 3.14159265358979
 Private Const EPSILON12 As Double = 0.000000000001
-Private Const EPSILON16 As Double = 2.2E-16
+Private Const EPSILON16 As Double = 2 ^ -52 ' ~2.2E-16
 ' WGS-84 ellipsiod
 Private Const low_a As Double = 6378137
 Private Const low_b As Double = 6356752.3142
@@ -45,6 +45,7 @@ End Type
 Private Type InvParams
     upper_A As Double
     sigma As Double
+    sinSqSigma As Double
     deltaSigma As Double
     sinU1 As Double
     cosU1 As Double
@@ -63,7 +64,7 @@ Attribute VincentyDirLat.VB_ProcData.VB_Invoke_Func = " \n20"
     Dim p As DirParams: p = VincentyDir(lat, lon, azimuth, distance)
     
     Dim x As Double: x = p.sinU1 * p.sinSigma - p.cosU1 * p.cosSigma * p.cosAlpha1
-    Dim phi2 As Double: phi2 = Atan2((1 - f) * Sqr(p.sinAlpha * p.sinAlpha + x * x), p.sinU1 * p.cosSigma + p.cosU1 * p.sinSigma * p.cosAlpha1)
+    Dim phi2 As Double: phi2 = Atan2(p.sinU1 * p.cosSigma + p.cosU1 * p.sinSigma * p.cosAlpha1, (1 - f) * Sqr(p.sinAlpha * p.sinAlpha + x * x))
  
     VincentyDirLat = ToDegrees(phi2)
     Exit Function
@@ -82,10 +83,10 @@ Attribute VincentyDirLon.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
     Dim p As DirParams: p = VincentyDir(lat, lon, azimuth, distance)
     
-    Dim lambda As Double: lambda = Atan2(p.cosU1 * p.cosSigma - p.sinU1 * p.sinSigma * p.cosAlpha1, p.sinSigma * p.sinAlpha1)
-    Dim c As Double: c = f / 16 * p.cosSqAlpha * (4 + f * (4 - 3 * p.cosSqAlpha))
-    Dim fix1 As Double: fix1 = p.cos2sigmaM + c * p.cosSigma * (-1 + 2 * p.cos2sigmaM * p.cos2sigmaM)
-    Dim L As Double: L = lambda - (1 - c) * f * p.sinAlpha * (p.sigma + c * p.sinSigma * fix1)
+    Dim lambda As Double: lambda = Atan2(p.sinSigma * p.sinAlpha1, p.cosU1 * p.cosSigma - p.sinU1 * p.sinSigma * p.cosAlpha1)
+    Dim C As Double: C = f / 16 * p.cosSqAlpha * (4 + f * (4 - 3 * p.cosSqAlpha))
+    Dim fix1 As Double: fix1 = p.cos2sigmaM + C * p.cosSigma * (-1 + 2 * p.cos2sigmaM * p.cos2sigmaM)
+    Dim L As Double: L = lambda - (1 - C) * f * p.sinAlpha * (p.sigma + C * p.sinSigma * fix1)
     
     Dim lambda2 As Double: lambda2 = p.lambda1 + L
     
@@ -110,15 +111,17 @@ Attribute VincentyDirRevAzimuth.VB_Description = "Calculates geodesic azimuth in
 Attribute VincentyDirRevAzimuth.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
     Dim p As DirParams: p = VincentyDir(lat, lon, azimuth, distance)
-    
+
     Dim x As Double: x = p.sinU1 * p.sinSigma - p.cosU1 * p.cosSigma * p.cosAlpha1
-    Dim alpha2 As Double: alpha2 = Atan2(-x, p.sinAlpha)
+    Dim alpha2 As Double: alpha2 = Atan2(p.sinAlpha, -x)
     
     If returnAzimuth Then
         VincentyDirRevAzimuth = NormalizeAzimuth(ToDegrees(alpha2) + 180, True)
     Else
         VincentyDirRevAzimuth = NormalizeAzimuth(ToDegrees(alpha2), True)
+
     End If
+
     Exit Function
 error:
 If Err.Number = Excel.xlErrNA Then
@@ -163,7 +166,15 @@ Attribute VincentyInvFwdAzimuth.VB_ProcData.VB_Invoke_Func = " \n20"
         VincentyInvFwdAzimuth = CVErr(Excel.xlErrNA): Exit Function
     End If
     
-    Dim fwdAz As Double: fwdAz = Atan2(p.cosU1 * p.sinU2 - p.sinU1 * p.cosU2 * p.cosLambda, p.cosU2 * p.sinLambda)
+    Dim fwdAz As Double
+    
+    If Abs(p.sinSqSigma) < EPSILON16 Then
+        ' special handling of exactly antipodal points where sinSigma = 0
+        fwdAz = 0
+    Else
+        fwdAz = Atan2(p.cosU2 * p.sinLambda, p.cosU1 * p.sinU2 - p.sinU1 * p.cosU2 * p.cosLambda)
+    End If
+    
     VincentyInvFwdAzimuth = NormalizeAzimuth(ToDegrees(fwdAz), True)
     Exit Function
 error:
@@ -187,7 +198,15 @@ Attribute VincentyInvRevAzimuth.VB_ProcData.VB_Invoke_Func = " \n20"
         VincentyInvRevAzimuth = CVErr(Excel.xlErrNA): Exit Function
     End If
     
-    Dim revAz As Double: revAz = Atan2(-p.sinU1 * p.cosU2 + p.cosU1 * p.sinU2 * p.cosLambda, p.cosU1 * p.sinLambda)
+    Dim revAz As Double
+    
+    If Abs(p.sinSqSigma) < EPSILON16 Then
+        ' special handling of exactly antipodal points where sinSigma = 0
+        revAz = PI
+    Else
+        revAz = Atan2(p.cosU1 * p.sinLambda, -p.sinU1 * p.cosU2 + p.cosU1 * p.sinU2 * p.cosLambda)
+    End If
+    
     If returnAzimuth Then
         VincentyInvRevAzimuth = NormalizeAzimuth(ToDegrees(revAz) + 180, True)
     Else
@@ -216,34 +235,34 @@ Private Function VincentyDir(ByVal lat As Double, ByVal lon As Double, ByVal azi
     Dim fix2 As Double ' temp variable to prevent "formula too complex.." error
     
     p.sinAlpha1 = Sin(alpha1)
-    p.cosAlpha1 = cos(alpha1)
+    p.cosAlpha1 = Cos(alpha1)
 
     Dim tanU1 As Double: tanU1 = (1 - f) * Tan(phi1)
-    p.cosU1 = 1 / Sqr((1 + tanU1 * tanU1))
+    p.cosU1 = 1 / Sqr((1 + tanU1 ^ 2))
     p.sinU1 = tanU1 * p.cosU1
-    Dim sigma1 As Double: sigma1 = Atan2(p.cosAlpha1, tanU1)
-    p.sinAlpha = p.cosU1 * p.sinAlpha1
-    p.cosSqAlpha = 1 - p.sinAlpha * p.sinAlpha
-    fix1 = low_a * low_a - low_b * low_b
-    Dim uSq As Double: uSq = p.cosSqAlpha * fix1 / (low_b * low_b)
+    Dim sigma1 As Double: sigma1 = Atan2(tanU1, p.cosAlpha1) ' sigma1 = angular distance on the sphere from the equator to P1
+    p.sinAlpha = p.cosU1 * p.sinAlpha1 ' Alpha = azimuth of the geodesic at the equator
+    p.cosSqAlpha = 1 - p.sinAlpha ^ 2
+    fix1 = low_a ^ 2 - low_b ^ 2
+    Dim uSq As Double: uSq = p.cosSqAlpha * fix1 / (low_b ^ 2)
     fix1 = -768 + uSq * (320 - 175 * uSq)
-    Dim a As Double: a = 1 + uSq / 16384 * (4096 + uSq * fix1)
+    Dim A As Double: A = 1 + uSq / 16384 * (4096 + uSq * fix1)
     fix1 = -128 + uSq * (74 - 47 * uSq)
     Dim B As Double: B = uSq / 1024 * (256 + uSq * fix1)
+    
+    p.sigma = s / (low_b * A)
     Dim deltaSigma As Double
-
-    p.sigma = s / (low_b * a)
     Dim sigma2 As Double
     Dim iterationCount As Integer:  iterationCount = 0
     
     Do
-        p.cos2sigmaM = cos(2 * sigma1 + p.sigma)
+        p.cos2sigmaM = Cos(2 * sigma1 + p.sigma)
         p.sinSigma = Sin(p.sigma)
-        p.cosSigma = cos(p.sigma)
+        p.cosSigma = Cos(p.sigma)
         deltaSigma = B * p.sinSigma * (p.cos2sigmaM + B / 4 * (p.cosSigma * (-1 + 2 * p.cos2sigmaM * p.cos2sigmaM) - _
             B / 6 * p.cos2sigmaM * (-3 + 4 * p.sinSigma * p.sinSigma) * (-3 + 4 * p.cos2sigmaM * p.cos2sigmaM)))
         sigma2 = p.sigma
-        p.sigma = s / (low_b * a) + deltaSigma
+        p.sigma = s / (low_b * A) + deltaSigma
         iterationCount = iterationCount + 1
     Loop While Abs(p.sigma - sigma2) > EPSILON12 And iterationCount < MaxIterations
     
@@ -257,54 +276,64 @@ End Function
 
 Private Function VincentyInv(ByVal lat1 As Double, ByVal lon1 As Double, ByVal lat2 As Double, ByVal lon2 As Double) As InvParams
     Dim p As InvParams
-
-    Dim L As Double: L = ToRadians(lon2 - lon1)
-    Dim U1 As Double: U1 = Atn((1 - f) * Tan(ToRadians(lat1)))
-    Dim U2 As Double: U2 = Atn((1 - f) * Tan(ToRadians(lat2)))
-    Dim lambda As Double: lambda = L
-    Dim lambdaP As Double: lambdaP = 2 * PI
     Dim sinSigma As Double
     Dim cosSigma As Double
     Dim sinAlpha As Double
     Dim cosSqAlpha As Double
     Dim cos2sigmaM As Double
-    Dim c As Double
+    Dim C As Double
     Dim uSq As Double
     Dim upper_B As Double
     Dim fix2 As Double ' temp variable to prevent "formula too complex.." error
     Dim fix1 As Double ' temp variable to prevent "formula too complex.." error
     Dim iterationCount As Integer: iterationCount = 0
-    Dim antimeridian As Boolean: antimeridian = Abs(L) > PI
     
-    p.sinU1 = Sin(U1)
-    p.sinU2 = Sin(U2)
-    p.cosU1 = cos(U1)
-    p.cosU2 = cos(U2)
+    lat1 = ToRadians(lat1)
+    lat2 = ToRadians(lat2)
+    
+    Dim L As Double: L = ToRadians(lon2 - lon1)
+    
+    Dim tanU1 As Double: tanU1 = (1 - f) * Tan(lat1)
+    p.cosU1 = 1 / Sqr(1 + (tanU1 ^ 2))
+    p.sinU1 = tanU1 * p.cosU1
+    
+    Dim tanU2 As Double: tanU2 = (1 - f) * Tan(lat2)
+    p.cosU2 = 1 / Sqr(1 + (tanU2 ^ 2))
+    p.sinU2 = tanU2 * p.cosU2
+    
+    Dim antipodal As Boolean: antipodal = Abs(L) > PI / 2 Or Abs(lat2 - lat1) > PI / 2
+    
+    Dim lambda As Double: lambda = L
+    p.sigma = IIf(antipodal, PI, 0)
+    cosSigma = IIf(antipodal, -1, 1)
+    cos2sigmaM = 1
+    cosSqAlpha = 1
+    Dim lambdaP As Double
         
     Do
         p.sinLambda = Sin(lambda)
-        p.cosLambda = cos(lambda)
-        sinSigma = ((p.cosU2 * p.sinLambda) ^ 2) + ((p.cosU1 * p.sinU2 - p.sinU1 * p.cosU2 * p.cosLambda) ^ 2)
-        If Abs(sinSigma) < EPSILON16 Then Exit Do  ' co-incident points
-        sinSigma = Sqr(sinSigma)
+        p.cosLambda = Cos(lambda)
+        p.sinSqSigma = ((p.cosU2 * p.sinLambda) ^ 2) + ((p.cosU1 * p.sinU2 - p.sinU1 * p.cosU2 * p.cosLambda) ^ 2)
+        If Abs(p.sinSqSigma) < EPSILON16 Then Exit Do  ' co-incident points/antipodal points
+        sinSigma = Sqr(p.sinSqSigma)
         cosSigma = p.sinU1 * p.sinU2 + p.cosU1 * p.cosU2 * p.cosLambda
-        p.sigma = Atan2(cosSigma, sinSigma)
+        p.sigma = Atan2(sinSigma, cosSigma)
         sinAlpha = p.cosU1 * p.cosU2 * p.sinLambda / sinSigma
-        cosSqAlpha = 1 - sinAlpha * sinAlpha
+        cosSqAlpha = 1 - (sinAlpha ^ 2)
         
         If cosSqAlpha <> 0 Then
             cos2sigmaM = cosSigma - 2 * p.sinU1 * p.sinU2 / cosSqAlpha
         Else
-            cos2sigmaM = 0
+            cos2sigmaM = 0 ' // on equatorial line cosSqAlpha = 0 (par 6)
         End If
 
-        c = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha))
+        C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha))
         lambdaP = lambda
         
-        fix1 = cos2sigmaM + c * cosSigma * (-1 + 2 * (cos2sigmaM ^ 2))
-        lambda = L + (1 - c) * f * sinAlpha * (p.sigma + c * sinSigma * fix1)
+        fix1 = cos2sigmaM + C * cosSigma * (-1 + 2 * (cos2sigmaM ^ 2))
+        lambda = L + (1 - C) * f * sinAlpha * (p.sigma + C * sinSigma * fix1)
         
-        Dim iterationCheck As Double: iterationCheck = IIf(antimeridian, Abs(lambda) - PI, Abs(lambda))
+        Dim iterationCheck As Double: iterationCheck = IIf(antipodal, Abs(lambda) - PI, Abs(lambda))
         
         If iterationCheck > PI Then
             Err.Raise (Excel.xlErrNA): Exit Function
@@ -432,12 +461,12 @@ Attribute ConvertDecimal.VB_ProcData.VB_Invoke_Func = " \n20"
         degreeDeg = Replace$(degreeDeg, Space(2), Space(1))
     Loop Until Len(temp) = Len(degreeDeg)
     
-    Dim a() As String: a = Split(degreeDeg, " ")
-    Dim L As Integer: L = UBound(a)
+    Dim A() As String: A = Split(degreeDeg, " ")
+    Dim L As Integer: L = UBound(A)
     
-    Dim degrees As Double: degrees = val(a(0))
-    Dim minutes As Double: If L > 0 Then minutes = val(a(1)): minutes = minutes / 60
-    Dim seconds As Double: If L > 1 Then seconds = val(a(2)): seconds = seconds / 3600
+    Dim degrees As Double: degrees = val(A(0))
+    Dim minutes As Double: If L > 0 Then minutes = val(A(1)): minutes = minutes / 60
+    Dim seconds As Double: If L > 1 Then seconds = val(A(2)): seconds = seconds / 3600
     
     ConvertDecimal = (degrees + (Sign(degrees) * minutes) + (Sign(degrees) * Sign(minutes) * seconds)) * s
     Exit Function
@@ -468,7 +497,7 @@ Private Function ModDouble(ByVal dividend As Double, ByVal divisor As Double, Op
     ' this function can only be accurate when (a / b) is outside [-2.22E-16,+2.22E-16]
     ' without this correction, ModDouble(.66, .06) = 5.55111512312578E-17 when it should be 0
     ' http://en.wikipedia.org/wiki/Machine_epsilon
-    If ModDouble >= -2 ^ -52 And ModDouble <= 2 ^ -52 Then '+/- 2.22E-16
+    If ModDouble >= -EPSILON16 And ModDouble <= EPSILON16 Then '+/- 2.22E-16
         ModDouble = 0
     End If
 End Function
@@ -486,22 +515,23 @@ Public Function NormalizeAzimuth(ByVal azimuth As Double, Optional positiveOnly 
 End Function
 
 ' source: http://en.wikibooks.org/wiki/Programming:Visual_Basic_Classic/Simple_Arithmetic#Trigonometrical_Functions
-Private Function Atan2(ByVal x As Double, ByVal Y As Double) As Double
-    If Y > 0 Then
-        If x >= Y Then
-            Atan2 = Atn(Y / x)
-        ElseIf x <= -Y Then
-            Atan2 = Atn(Y / x) + PI
+' note: x & y are in reverse order to match Java Math.atan2() params
+Private Function Atan2(ByVal y As Double, ByVal x As Double) As Double
+    If y > 0 Then
+        If x >= y Then
+            Atan2 = Atn(y / x)
+        ElseIf x <= -y Then
+            Atan2 = Atn(y / x) + PI
         Else
-        Atan2 = PI / 2 - Atn(x / Y)
-    End If
+            Atan2 = PI / 2 - Atn(x / y)
+        End If
+    Else
+        If x >= -y Then
+            Atan2 = Atn(y / x)
+        ElseIf x <= y Then
+            Atan2 = Atn(y / x) - PI
         Else
-            If x >= -Y Then
-            Atan2 = Atn(Y / x)
-        ElseIf x <= Y Then
-            Atan2 = Atn(Y / x) - PI
-        Else
-            Atan2 = -Atn(x / Y) - PI / 2
+            Atan2 = -Atn(x / y) - PI / 2
         End If
     End If
 End Function
