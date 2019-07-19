@@ -7,10 +7,9 @@ Attribute VB_Name = "Vincenty"
 ' https://geographiclib.sourceforge.io/geodesic-papers/vincenty75b.pdf
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ' Ported to VBA by (c) Tomasz Jastrzebski 2018-2019 MIT Licence
-' https://github.com/tdjastrzebski/VincentyExcel
+' Version: 2019-07-10
 ' Latest version available at:
 ' https://github.com/tdjastrzebski/Vincenty-Excel
-' Version: 2019-07-10
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ' Based on the implementation by Chris Veness, ver 2.2.0
 ' https://www.movable-type.co.uk/scripts/latlong-vincenty.html
