@@ -20,7 +20,7 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 + [Vincenty.bas](../../raw/master/Vincenty.bas) - VBA module source code - can be simply added to any existing workbook
 
 ## How to use it?
-+ Vincenty functions can be simply added to any existing workbook. Download **Vincenty.bas** file, in Excel hit [Alt+F11] to open Visual Basic editor. Next, in the browser panel right-click on **VBA Project (<<your file name>>)**, select **Import File** and choose downloaded **Vincenty.bas** module. Then save as 'macro-enabled workbook" and you are ready to go.  
++ Vincenty functions can be simply added to any existing workbook. Download **Vincenty.bas** file, in Excel hit [Alt+F11] to open Visual Basic editor. Next, in the browser panel right-click on **VBA Project (your file name)**, select **Import File** and choose downloaded **Vincenty.bas** module. Then save as 'macro-enabled workbook" and you are ready to go.  
 + If you prefer to use Excel Add-in it must be placed in a directory registered as "Trusted Location". See [Add, remove, or change a trusted location](https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4) for more details. Demo workbook does not require Add-in.
 + There is no IntelliSense available for VBA Add-in UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** or **User Defined** category.
 
