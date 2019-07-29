@@ -7,7 +7,7 @@ Attribute VB_Name = "Vincenty"
 ' https://geographiclib.sourceforge.io/geodesic-papers/vincenty75b.pdf
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ' Ported to VBA by (c) Tomasz Jastrzebski 2018-2019 MIT Licence
-' Version: 2019-07-10
+' Version: 2019-07-26
 ' Latest version available at:
 ' https://github.com/tdjastrzebski/Vincenty-Excel
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -19,7 +19,7 @@ Attribute VB_Name = "Vincenty"
 Option Explicit
 
 Private Const PI = 3.14159265358979
-Private Const EPSILON12 As Double = 0.000000000001
+Private Const EPSILON12 As Double = 0.000000000001 ' 1E-12
 Private Const EPSILON16 As Double = 2 ^ -52 ' ~2.2E-16
 ' WGS-84 ellipsiod
 Private Const low_a As Double = 6378137
@@ -388,7 +388,7 @@ Attribute ConvertDegrees.VB_ProcData.VB_Invoke_Func = " \n20"
     End If
     
     If decimalDeg = 0 Then
-        ' no nothing
+        ' do nothing
     ElseIf IsMissing(isLongitude) Then
         If s = -1 Then ConvertDegrees = "-" + ConvertDegrees
     ElseIf isLongitude Then
@@ -425,31 +425,33 @@ Attribute ConvertDecimal.VB_ProcData.VB_Invoke_Func = " \n20"
     Dim lc As String: lc = Right$(degreeDeg, 1) ' the last character
     Dim fc As String: fc = Left$(degreeDeg, 1) ' the first character
     Dim s As Integer: s = 1  ' sign
-    
+
     If Not IsNumeric(fc) And Not IsNumeric(lc) And fc <> "-" Then
         ConvertDecimal = CVErr(Excel.xlErrNA): Exit Function
     ElseIf Not IsNumeric(lc) Then
         degreeDeg = Left$(degreeDeg, Len(degreeDeg) - 1) ' trim the last char
         degreeDeg = Trim$(degreeDeg)
         
-        If lc = "W" Or lc = "w" Or lc = "S" Or lc = "s" Then
+        Select Case lc
+        Case "W", "w", "S", "s"
             s = -1
-        ElseIf lc = "E" Or lc = "e" Or lc = "N" Or lc = "n" Then
-            ' do nothing
-        Else
+        Case "E", "e", "N", "n"
+            s = 1
+        Case Else
             ConvertDecimal = CVErr(Excel.xlErrNA): Exit Function
-        End If
+        End Select
     ElseIf Not IsNumeric(fc) And fc <> "-" Then
         degreeDeg = Right$(degreeDeg, Len(degreeDeg) - 1) ' trim the first char
         degreeDeg = Trim$(degreeDeg)
         
-        If fc = "W" Or fc = "w" Or fc = "S" Or fc = "s" Then
+        Select Case fc
+        Case "W", "w", "S", "s"
             s = -1
-        ElseIf fc = "E" Or fc = "e" Or fc = "N" Or lc = "n" Then
-            ' do nothing
-        Else
+        Case "E", "e", "N", "n"
+            s = 1
+        Case Else
             ConvertDecimal = CVErr(Excel.xlErrNA): Exit Function
-        End If
+        End Select
     End If
     
     Dim temp As String
@@ -461,7 +463,7 @@ Attribute ConvertDecimal.VB_ProcData.VB_Invoke_Func = " \n20"
     Loop Until Len(temp) = Len(degreeDeg)
     
     Dim A() As String: A = Split(degreeDeg, " ")
-    Dim L As Integer: L = UBound(A)
+    Dim L As Integer: L = UBound(A) ' length
     
     Dim degrees As Double: degrees = val(A(0))
     Dim minutes As Double: If L > 0 Then minutes = val(A(1)): minutes = minutes / 60
@@ -514,7 +516,7 @@ Public Function NormalizeAzimuth(ByVal azimuth As Double, Optional positiveOnly 
 End Function
 
 ' source: http://en.wikibooks.org/wiki/Programming:Visual_Basic_Classic/Simple_Arithmetic#Trigonometrical_Functions
-' note: x & y are in reverse order to match Java Math.atan2() params
+' note: x & y are in reverse order to match JavaScript Math.atan2() params order
 Private Function Atan2(ByVal y As Double, ByVal x As Double) As Double
     If y > 0 Then
         If x >= y Then
