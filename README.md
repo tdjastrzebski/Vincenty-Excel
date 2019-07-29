@@ -19,9 +19,9 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 + Besides some Add-in restrictions there is no IntelliSense available for VBA Add-in UDFs.
 
 ## Excel files
-+ [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook (demo)
++ [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Demo Workbook (demo)
 + [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
-+ [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Workbook (demo)
++ [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Demo Workbook
 + [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Add-in
 + [Vincenty.bas](../../raw/master/Vincenty.bas) - VBA module source code - can be simply added to any existing workbook
 
