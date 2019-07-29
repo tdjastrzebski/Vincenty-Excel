@@ -17,6 +17,7 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 + [Vincenty.xlam](../../raw/master/Vincenty.xlam) - Excel Add-in
 + [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Workbook (demo)
 + [Vincenty.xla](../../raw/master/Vincenty.xla) - Excel 97-2003 Add-in
++ [Vincenty.bas](../../raw/master/Vincenty.bas) - VBA module source code - can be simply added to any existing workbook
 
 > + There is no IntelliSense available for VBA UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** or **User Defined** category.
 > + Excel Add-in must be placed in a directory registered as "Trusted Location". See [Add, remove, or change a trusted location](https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4) for more details. Demo workbook does not require Add-in.
