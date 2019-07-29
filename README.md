@@ -13,9 +13,10 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 ![Excel screenshot](ExcelScreenshot.png)
 
 ## How to use it?
-+ Vincenty functions can be simply added to any existing Excel workbook. Download [Vincenty.bas](../../raw/master/Vincenty.bas) file, in Excel hit [Alt+F11] to open Visual Basic editor. Next, in the browser panel right-click on **VBA Project (your file name)**, select **Import File** and choose downloaded [Vincenty.bas](../../raw/master/Vincenty.bas) module. Then save as 'macro-enabled workbook" and you are ready to go.
-+ If you prefer to use Excel Add-in it must be placed in a directory registered as "Trusted Location". See [Add, remove, or change a trusted location](https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4) for more details. Demo workbook does not require Add-in.
-+ There is no IntelliSense available for VBA Add-in UDFs. However, functions and their parameters are listed in Excel function wizard under the **Geodesic** or **User Defined** category.
++ Vincenty functions can be simply added to any existing Excel workbook. Download [Vincenty.bas](../../raw/master/Vincenty.bas) file, in Excel hit [Alt+F11] to open Visual Basic editor. Next, in the browser panel right-click on **VBA Project (your file name)**, select **Import File** and choose downloaded [Vincenty.bas](../../raw/master/Vincenty.bas) module. Then save as 'macro-enabled workbook" and you can use added functions in your Excel formulas. In a cell just start typing: `=Vincenty..` and you should see the list of added functions.
++ Functions and their parameters are listed in Excel function wizard under the **Geodesic** or **User Defined** category.
++ If you prefer to use Excel Add-in it must be placed in a directory registered as "Trusted Location". See [Add, remove, or change a trusted location](https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4) for more details. Note demo workbook does not require Add-in.
++ Besides some Add-in restrictions there is no IntelliSense available for VBA Add-in UDFs.
 
 ## Excel files
 + [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Workbook (demo)
