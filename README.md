@@ -17,7 +17,7 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 + Functions and their parameters are listed in Excel function wizard under the **Geodesic** or **User Defined** category.
 + Using VBA workbook modues makes workbook self-contained.
 + If you prefer to use Excel Add-in instead Add-in file must be placed in a directory registered as "Trusted Location". See [Add, remove, or change a trusted location](https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4) for more details. Note demo workbook does not require Add-in.
-+ Besides the above Add-in requirements there is no IntelliSense available for VBA Add-in UDFs.
++ Besides the above Add-in requirement there is no IntelliSense available for VBA Add-in UDFs.
 + Add-in, however, has one important advantage: it can be shared among many Excel workbooks, simplyfying future updates.
 + You can anytime save workbook with my module as Add-in and start using such Add-in.  
 
