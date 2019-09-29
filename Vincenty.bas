@@ -413,10 +413,10 @@ Attribute ConvertDecimal.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
     degreeDeg = Replace$(degreeDeg, ChrW(8243), " ") ' double quote
     degreeDeg = Replace$(degreeDeg, ChrW(8242), " ") ' single quote
-    degreeDeg = Replace$(degreeDeg, "''", " ") ' double quote
+    degreeDeg = Replace$(degreeDeg, "''", " ") ' double single quote
     degreeDeg = Replace$(degreeDeg, """", " ") ' double quote
     degreeDeg = Replace$(degreeDeg, "'", " ") ' single quote
-    degreeDeg = Replace$(degreeDeg, "°", " ") ' ordinal indicator
+    degreeDeg = Replace$(degreeDeg, Chr(167), " ") ' ordinal indicator
     degreeDeg = Replace$(degreeDeg, Chr(248), " ") ' degree symbol
     degreeDeg = Replace$(degreeDeg, ":", " ")
     degreeDeg = Replace$(degreeDeg, "*", " ")

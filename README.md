@@ -91,4 +91,5 @@ For complete test results refer to [VincentyTest.xlsm](../../raw/master/Vincenty
 
 ## Feedback
 
-Do not hesitate to rate this repo and/or leave comments/suggestions if you find my work useful.
+Finally, if you find this tool useful please give it a star. This way others will be able to find it more easily.
+Do not hesitate leave comments/suggestions.
