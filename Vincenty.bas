@@ -7,7 +7,7 @@ Attribute VB_Name = "Vincenty"
 ' https://geographiclib.sourceforge.io/geodesic-papers/vincenty75b.pdf
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ' Ported to VBA by (c) Tomasz Jastrzebski 2018-2019 MIT Licence
-' Version: 2019-07-26
+' Version: 2019-10-08
 ' Latest version available at:
 ' https://github.com/tdjastrzebski/Vincenty-Excel
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -382,9 +382,9 @@ Attribute ConvertDegrees.VB_ProcData.VB_Invoke_Func = " \n20"
     Dim seconds As Double: seconds = Round((decimalDeg - degrees - (minutes / 60)) * 60 * 60, 4) ' 4 digit precision corresponds to ~3mm
             
     If Not IsMissing(isLongitude) And Not CBool(isLongitude) Then
-        ConvertDegrees = Format$(degrees, "00") & "°" & Format$(minutes, "00") & "'" & Format$(seconds, "00.0000") + Chr(34)
+        ConvertDegrees = Format$(degrees, "00") & Chr$(176) & Format$(minutes, "00") & "'" & Format$(seconds, "00.0000") + Chr$(34)
     Else
-        ConvertDegrees = Format$(degrees, "000") & "°" & Format$(minutes, "00") & "'" & Format$(seconds, "00.0000") + Chr(34)
+        ConvertDegrees = Format$(degrees, "000") & Chr$(176) & Format$(minutes, "00") & "'" & Format$(seconds, "00.0000") + Chr$(34)
     End If
     
     If decimalDeg = 0 Then
@@ -411,13 +411,15 @@ Public Function ConvertDecimal(degreeDeg As String) As Variant
 Attribute ConvertDecimal.VB_Description = "Converts latitude, longitude or azimuth in degrees/minutes/seconds format to decimal value"
 Attribute ConvertDecimal.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
-    degreeDeg = Replace$(degreeDeg, ChrW(8243), " ") ' double quote
-    degreeDeg = Replace$(degreeDeg, ChrW(8242), " ") ' single quote
     degreeDeg = Replace$(degreeDeg, "''", " ") ' double single quote
     degreeDeg = Replace$(degreeDeg, """", " ") ' double quote
-    degreeDeg = Replace$(degreeDeg, "'", " ") ' single quote
-    degreeDeg = Replace$(degreeDeg, Chr(167), " ") ' ordinal indicator
-    degreeDeg = Replace$(degreeDeg, Chr(248), " ") ' degree symbol
+    degreeDeg = Replace$(degreeDeg, "'", " ")  ' single quote
+    degreeDeg = Replace$(degreeDeg, ChrW$(8242), " ") ' Prime
+    degreeDeg = Replace$(degreeDeg, ChrW$(8243), " ") ' Double Prime
+    degreeDeg = Replace$(degreeDeg, Chr$(167), " ") ' Section Sign
+    degreeDeg = Replace$(degreeDeg, Chr$(176), " ") ' Degree Sign
+    degreeDeg = Replace$(degreeDeg, Chr$(186), " ") ' Masculine Ordinal Indicator
+    degreeDeg = Replace$(degreeDeg, Chr$(248), " ") ' Latin Small Letter O With Stroke
     degreeDeg = Replace$(degreeDeg, ":", " ")
     degreeDeg = Replace$(degreeDeg, "*", " ")
     degreeDeg = Trim$(degreeDeg)
