@@ -88,5 +88,5 @@ For complete test results refer to [VincentyTest.xlsm](../../raw/master/Vincenty
 
 ## Feedback
 
-Finally, if you find this tool useful please give it a star. This way others will be able to find it more easily.
-Do not hesitate leave comments/suggestions.
+Finally, if you find this tool useful please give it a star. This way others will be able to find it more easily.  
+Do not hesitate to leave comments/suggestions.
