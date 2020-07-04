@@ -57,7 +57,7 @@ End Type
 
 ' Calculates geodesic latitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids
 Public Function VincentyDirLat(ByVal lat As Double, ByVal lon As Double, ByVal azimuth As Double, ByVal distance As Double) As Variant
-Attribute VincentyDirLat.VB_Description = "Calculates geodesic latitude (in degrees) based on one point, azimuth and distance using Vincenty's direct formula for ellipsoids"
+Attribute VincentyDirLat.VB_Description = "Calculates geodesic latitude (in degrees) based on one point, azimuth and distance using Vincenty's direct formula for ellipsoids."
 Attribute VincentyDirLat.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
     Dim p As DirParams: p = VincentyDir(lat, lon, azimuth, distance)
@@ -106,7 +106,7 @@ End Function
 
 ' Calculates geodesic reverse azimuth (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids.
 Public Function VincentyDirRevAzimuth(ByVal lat As Double, ByVal lon As Double, ByVal azimuth As Double, ByVal distance As Double, Optional returnAzimuth As Boolean = False) As Variant
-Attribute VincentyDirRevAzimuth.VB_Description = "Calculates geodesic azimuth in degrees clockwise from north based on one point, azimuth and distance using Vincenty's direct formula for ellipsoids."
+Attribute VincentyDirRevAzimuth.VB_Description = "Calculates geodesic reverse azimuth (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids. Note: by default forward azimuth is returned. For return azimuth (2->1) use returnAzimuth = true."
 Attribute VincentyDirRevAzimuth.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
     Dim p As DirParams: p = VincentyDir(lat, lon, azimuth, distance)
@@ -188,7 +188,7 @@ End Function
 
 ' Calculates geodesic reverse azimuth (in degrees) between two points specified by latitude/longitude (in numeric degrees) using Vincenty's inverse formula for ellipsoids.
 Public Function VincentyInvRevAzimuth(ByVal lat1 As Double, ByVal lon1 As Double, ByVal lat2 As Double, ByVal lon2 As Double, Optional returnAzimuth As Boolean = False) As Variant
-Attribute VincentyInvRevAzimuth.VB_Description = "Calculates geodesic reverse azimuth in degrees clockwise from north between two points specified by latitude/longitude using Vincenty's inverse formula for ellipsoids."
+Attribute VincentyInvRevAzimuth.VB_Description = "Calculates geodesic reverse azimuth (in degrees) between two points (latitude/longitude in numeric degrees) using Vincenty's inverse formula for ellipsoids. Note: by default forward azimuth is returned. For return azimuth (2->1) use returnAzimuth = true."
 Attribute VincentyInvRevAzimuth.VB_ProcData.VB_Invoke_Func = " \n20"
     On Error GoTo error:
     Dim p As InvParams: p = VincentyInv(lat1, lon1, lat2, lon2)
@@ -365,7 +365,7 @@ End Function
 
 ' Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format.
 Public Function ConvertDegrees(ByVal decimalDeg As Double, Optional isLongitude As Variant) As String
-Attribute ConvertDegrees.VB_Description = "Converts latitude, longitude or azimuth in decimal degrees to string in degrees/minutes/seconds format."
+Attribute ConvertDegrees.VB_Description = "Converts latitude, longitude or azimuth string in degrees/minutes/seconds format to decimal value. This function has been designed to parse typical formats."
 Attribute ConvertDegrees.VB_ProcData.VB_Invoke_Func = " \n20"
     If Not IsMissing(isLongitude) And CBool(isLongitude) Then
         decimalDeg = NormalizeLon(decimalDeg)
@@ -507,16 +507,22 @@ End Function
 
 ' Normalizes latitude to -90..+90 range
 Public Function NormalizeLat(ByVal lat As Double) As Double
+Attribute NormalizeLat.VB_Description = "Normalizes latitude to -90..+90 range."
+Attribute NormalizeLat.VB_ProcData.VB_Invoke_Func = " \n20"
     NormalizeLat = Abs(ModDouble(lat - 90, 360, True) - 180) - 90
 End Function
 
 ' Normalizes longitude to -180..+180 range
 Public Function NormalizeLon(ByVal lon As Double) As Double
+Attribute NormalizeLon.VB_Description = "Normalizes longitude to -180..+180 range."
+Attribute NormalizeLon.VB_ProcData.VB_Invoke_Func = " \n20"
     NormalizeLon = 2 * ModDouble((lon / 2) + 90, 180, True) - 180
 End Function
 
 ' Normalizes azimuth to 0..360 range. Note: by default input and return values have the same sign. To obtain only positive values pass positiveOnly = true
 Public Function NormalizeAzimuth(ByVal azimuth As Double, Optional positiveOnly As Boolean = False) As Double
+Attribute NormalizeAzimuth.VB_Description = "Normalizes azimuth to 0..360 range. Note: by default input and return values have the same sign. To obtain only positive values pass positiveOnly = true."
+Attribute NormalizeAzimuth.VB_ProcData.VB_Invoke_Func = " \n20"
     NormalizeAzimuth = ModDouble(azimuth, 360, positiveOnly)
 End Function
 
@@ -543,14 +549,16 @@ Private Function Atan2(ByVal y As Double, ByVal x As Double) As Double
 End Function
 
 Private Sub Workbook_Open()
+    ' note: Description is 255 chars max
     Application.MacroOptions Macro:="VincentyDirLat", Description:="Calculates geodesic latitude (in degrees) based on one point, azimuth and distance using Vincenty's direct formula for ellipsoids.", _
     ArgumentDescriptions:=Array("latitude in degrees", "longitude in degrees", "azimuth in degrees", "distance in meters"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/Vincenty-Excel"
     
     Application.MacroOptions Macro:="VincentyDirLon", Description:="Calculates geodesic longitude (in degrees) based on one point, azimuth and distance using Vincenty's direct formula for ellipsoids.", _
     ArgumentDescriptions:=Array("latitude in degrees", "longitude in degrees", "azimuth in degrees", "distance in meters"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/Vincenty-Excel"
-    
-    Application.MacroOptions Macro:="VincentyDirRevAzimuth", Description:="Calculates geodesic reverse azimuth (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids. Note: by default azimuth from point 1 to point 2 at point 2 is returned. To obtain azimuth from point 2 to point 1 pass returnAzimuth = true.", _
-    ArgumentDescriptions:=Array("latitude in degrees", "longitude in degrees", "azimuth in degrees", "distance in meters"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/Vincenty-Excel"
+        
+    Application.MacroOptions Macro:="VincentyDirRevAzimuth", Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/Vincenty-Excel", _
+    Description:="Calculates geodesic reverse azimuth (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids. Note: by default forward azimuth is returned. For return azimuth (2->1) use returnAzimuth = true.", _
+    ArgumentDescriptions:=Array("latitude in degrees", "longitude in degrees", "azimuth in degrees", "distance in meters", "is return azimuth, default false")
     
     Application.MacroOptions Macro:="VincentyInvDistance", Description:="Calculates geodesic distance in meters between two points specified by latitude/longitude using Vincenty's inverse formula for ellipsoids.", _
     ArgumentDescriptions:=Array("latitude 1 in degrees", "longitude 1 in degrees", "latitude 2 in degrees", "longitude 2 in degrees"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/Vincenty-Excel"
@@ -558,8 +566,9 @@ Private Sub Workbook_Open()
     Application.MacroOptions Macro:="VincentyInvFwdAzimuth", Description:="Calculates geodesic forward azimuth in degrees clockwise from north between two points specified by latitude/longitude using Vincenty's inverse formula for ellipsoids.", _
     ArgumentDescriptions:=Array("latitude 1 in degrees", "longitude 1 in degrees", "latitude 2 in degrees", "longitude 2 in degrees"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/Vincenty-Excel"
     
-    Application.MacroOptions Macro:="VincentyInvRevAzimuth", Description:="Calculates geodesic reverse azimuth (in degrees) between two points specified by latitude/longitude (in numeric degrees) using Vincenty's inverse formula for ellipsoids. Note: by default azimuth from point 1 to point 2 at point 2 is returned. To obtain azimuth from point 2 to point 1 pass returnAzimuth = true.", _
-    ArgumentDescriptions:=Array("latitude 1 in degrees", "longitude 1 in degrees", "latitude 2 in degrees", "longitude 2 in degrees"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/Vincenty-Excel"
+    Application.MacroOptions Macro:="VincentyInvRevAzimuth", Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/Vincenty-Excel", _
+    Description:="Calculates geodesic reverse azimuth (in degrees) between two points (latitude/longitude in numeric degrees) using Vincenty's inverse formula for ellipsoids. Note: by default forward azimuth is returned. For return azimuth (2->1) use returnAzimuth = true.", _
+    ArgumentDescriptions:=Array("latitude 1 in degrees", "longitude 1 in degrees", "latitude 2 in degrees", "longitude 2 in degrees", "is return azimuth, default false")
     
     Application.MacroOptions Macro:="ConvertDecimal", Description:="Converts latitude, longitude or azimuth in degrees/minutes/seconds format to decimal value.", _
     ArgumentDescriptions:=Array("string in degrees/minutes/seconds format"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/VincentyExcel"

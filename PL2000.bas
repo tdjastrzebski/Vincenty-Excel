@@ -48,6 +48,8 @@ End Type
 
 ' Calculates PL-2000 X coordinate based on geodesic latitude, longitude and target meridian.
 Public Function To2000X(ByVal lat As Double, ByVal lon As Double, ByVal meridian As Integer) As Double
+Attribute To2000X.VB_Description = "Calculates PL-2000 X coordinate based on geodesic latitude, longitude and target meridian."
+Attribute To2000X.VB_ProcData.VB_Invoke_Func = " \n20"
 Dim to2k As To2000: to2k = To2000(lat, lon, meridian)
 Dim Xgk As Double: Xgk = R0 * (to2k.Xmer + (a2 * Sin(2 * to2k.Xmer) * CosH(2 * to2k.Ymer)) + (a4 * Sin(4 * to2k.Xmer) * CosH(4 * to2k.Ymer)) _
     + (a6 * Sin(6 * to2k.Xmer) * CosH(6 * to2k.Ymer)) + (a8 * Sin(8 * to2k.Xmer) * CosH(8 * to2k.Ymer)))
@@ -57,6 +59,8 @@ End Function
 
 ' Calculates PL-2000 Y coordinate based on geodesic latitude, longitude and target meridian.
 Public Function To2000Y(ByVal lat As Double, ByVal lon As Double, ByVal meridian As Integer) As Double
+Attribute To2000Y.VB_Description = "Calculates PL-2000 Y coordinate based on geodesic latitude, longitude and target meridian."
+Attribute To2000Y.VB_ProcData.VB_Invoke_Func = " \n20"
 Dim to2k As To2000: to2k = To2000(lat, lon, meridian)
 Dim Ygk As Double: Ygk = R0 * (to2k.Ymer + (a2 * Cos(2 * to2k.Xmer) * SinH(2 * to2k.Ymer)) + (a4 * Cos(4 * to2k.Xmer) * SinH(4 * to2k.Ymer)) _
     + (a6 * Cos(6 * to2k.Xmer) * SinH(6 * to2k.Ymer)) + (a8 * Cos(8 * to2k.Xmer) * SinH(8 * to2k.Ymer)))
@@ -80,6 +84,8 @@ End Function
 
 ' Calculates geodesic latitude (in degrees) based on PL-2000 X, Y coordinates and meridian.
 Public Function From2000Lat(ByVal x As Double, ByVal y As Double, ByVal meridian As Integer) As Double
+Attribute From2000Lat.VB_Description = "Calculates geodesic latitude (in degrees) based on PL-2000 X, Y coordinates and meridian."
+Attribute From2000Lat.VB_ProcData.VB_Invoke_Func = " \n20"
 Dim from2k As From2000: from2k = From2000(x, y, meridian)
 Dim fi As Double: fi = ASin(Cos(from2k.w) * Sin(from2k.alpha))
 Dim radB As Double: radB = fi + c2 * Sin(2 * fi) + c4 * Sin(4 * fi) + c6 * Sin(6 * fi) + c8 * Sin(8 * fi) + 0.0000000008
@@ -89,6 +95,8 @@ End Function
 
 ' Calculates geodesic longitude (in degrees) based on PL-2000 X, Y coordinates and meridian.
 Public Function From2000Lon(ByVal x As Double, ByVal y As Double, ByVal meridian As Integer) As Double
+Attribute From2000Lon.VB_Description = "Calculates geodesic longitude (in degrees) based on PL-2000 X, Y coordinates and meridian."
+Attribute From2000Lon.VB_ProcData.VB_Invoke_Func = " \n20"
 Dim from2k As From2000: from2k = From2000(x, y, meridian)
 Dim dl As Double: dl = Atn((Tan(from2k.w)) / Cos(from2k.alpha))
 Dim L As Double: L = meridian + ToDegrees(dl)
@@ -143,6 +151,7 @@ End If
 End Function
 
 Private Sub Workbook_Open()
+    ' note: Description is 255 chars max
     Application.MacroOptions Macro:="From2000Lat", Description:="Calculates geodesic latitude (in degrees) based on PL-2000 X, Y coordinates and meridian.", _
     ArgumentDescriptions:=Array("X coordinate", "Y coordinate", "meridian - accepted values are 15, 18, 21, 24"), Category:="Geodesic", HelpFile:="https://github.com/tdjastrzebski/Vincenty-Excel"
     
