@@ -21,7 +21,7 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 + [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Demo Workbook (demo)
 + [Vincenty.xls](../../raw/master/Vincenty.xls) - Excel 97-2003 Demo Workbook
 + [Vincenty.bas](../../raw/master/Vincenty.bas) - VBA module source code - can be simply added to any existing workbook
-+ [PL2000.bas](../../raw/master/PL2000.bas) - VBA module source code - contains functions to translate WGS84 coordinates to/from the official Polish geodetic coordinate system (PL-2000) based on Gauss-Kruger coordinate system.
++ [PL2000.bas](../../raw/master/PL2000.bas) - VBA module source code - contains functions to translate WGS84 coordinates to/from the official Polish geodetic coordinate system (PL-2000) based on Gauss-Krüger coordinate system.
 
 ## Implementation
 Solution contains 6 functions implementing **Vincenty's Direct** and **Vincenty's Inverse** formulae as well as 2 functions for Decimal&nbsp;↔&nbsp;Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.
