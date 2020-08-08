@@ -24,7 +24,8 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 + [PL2000.bas](../../raw/master/PL2000.bas) - VBA module source code - contains functions to translate WGS84 coordinates to/from the Polish geodetic coordinate system (PL-2000), based on the Gauss-Krüger coordinate system.
 
 ## Implementation
-Solution contains 6 functions implementing **Vincenty's Direct** and **Vincenty's Inverse** formulae as well as 2 functions for Decimal&nbsp;↔&nbsp;Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.
+Solution contains 6 functions implementing **Vincenty's Direct** and **Vincenty's Inverse** formulae as well as 2 functions for Decimal&nbsp;↔&nbsp;Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.  
+> Note: Most function parameters are 64-bit high precision. In VBA `Double` data type is 64-bit floating-point number, regardless of whether 32 or 64 bit Excel edition is used.
 
 + `VincentyDirLat(lat as Double, lon as Double, azimuth as Double, distance as Double) as Variant` 
 Calculates geodesic latitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids.
@@ -62,8 +63,6 @@ Calculates geodesic longitude (in degrees) based on PL-2000 X, Y coordinates and
 Calculates PL-2000 X coordinate based on geodesic latitude, longitude and target meridian.  
 + `To2000Y(lat As Double, lon As Double, meridian As Integer) As Double`  
 Calculates PL-2000 Y coordinate based on geodesic latitude, longitude and target meridian.  
-
-> Note: Most function parameters are 64-bit high precision. In VBA `Double` data type is 64-bit floating-point number, regardless of whether 32 or 64 bit Excel edition is used.
 
 ## Source code
 Excel workbooks contain unprotected source code. In addition, for better change tracking, source code has been placed separately in [Vincenty.bas](Vincenty.bas) file. This file is all what is required to add implemented functions to any other Excel workbook.
