@@ -1,6 +1,6 @@
 Attribute VB_Name = "PL2000"
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-' Functions to translate WGS84 coordinates to/from the Polish Coordinate System PL-2000
+' Functions to translate WGS84 coordinates to/from the Polish geodetic coordinate system PL-2000
 ' (based on on the Gauss-Kruger coordinate system and GRS 80 ellipsoid)
 ' https://pl.wikipedia.org/wiki/Uk%C5%82ad_wsp%C3%B3%C5%82rz%C4%99dnych_2000
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -21,6 +21,12 @@ Option Explicit
 
 Private Const m0 As Double = 0.999923 ' skale m0
 Private Const R0 As Double = 6367449.14577 ' Lagrange radius
+Private Const e As Double = 0.0818191910428
+Private Const PI As Double = 3.14159265358979
+Private Const a2 As Double = 8.377318247344E-04
+Private Const a4 As Double = 7.608527788826E-07
+Private Const a6 As Double = 1.197638019173E-09
+Private Const a8 As Double = 2.4433762425E-12
 Private Const b2 As Double = -8.377321681641E-04
 Private Const b4 As Double = -5.905869626083E-08
 Private Const b6 As Double = -1.673488904988E-10
@@ -29,12 +35,6 @@ Private Const c2 As Double = 0.003356551485597
 Private Const c4 As Double = 6.571873148459E-06
 Private Const c6 As Double = 1.764656426454E-08
 Private Const c8 As Double = 5.40048218776E-11
-Private Const e As Double = 0.0818191910428
-Private Const a2 As Double = 8.377318247344E-04
-Private Const a4 As Double = 7.608527788826E-07
-Private Const a6 As Double = 1.197638019173E-09
-Private Const a8 As Double = 2.4433762425E-12
-Private Const PI As Double = 3.14159265358979
 
 Private Type To2000
     Xmer As Double
