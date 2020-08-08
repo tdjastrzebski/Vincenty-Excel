@@ -25,7 +25,7 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 
 ## Implementation
 Solution contains 6 functions implementing **Vincenty's Direct** and **Vincenty's Inverse** formulae as well as 2 functions for Decimal&nbsp;↔&nbsp;Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.  
-> Note: Most function parameters are 64-bit high precision. In VBA `Double` data type denotes 64-bit floating-point number, regardless of whether 32 or 64 bit Excel edition is used.
+> Note: Most function parameters and return values are 64-bit high precision. In VBA `Double` data type denotes 64-bit floating-point number, regardless of whether 32 or 64 bit Excel edition is used.
 
 + `VincentyDirLat(lat as Double, lon as Double, azimuth as Double, distance as Double) as Variant` 
 Calculates geodesic latitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids.
