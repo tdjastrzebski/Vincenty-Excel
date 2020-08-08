@@ -51,14 +51,14 @@ Normalizes longitude to -180..+180 range.
 + `NormalizeAzimuth(azimuth as Double, [positiveOnly as Boolean = False]) as Double` 
 Normalizes azimuth to 0..360 range. __Note__: by default input and return values have the same sign. To obtain only positive values pass `positiveOnly = true`.
 
-## PL-2000 Translation Implementation
-`From2000Lat(ByVal x As Double, ByVal y As Double, ByVal meridian As Integer) As Double`  
+### PL-2000 Translation Implementation
++ `From2000Lat(ByVal x As Double, ByVal y As Double, ByVal meridian As Integer) As Double`  
 ' Calculates geodesic latitude (in degrees) based on PL-2000 X, Y coordinates and meridian.  
-`From2000Lon(ByVal x As Double, ByVal y As Double, ByVal meridian As Integer) As Double`  
++ `From2000Lon(ByVal x As Double, ByVal y As Double, ByVal meridian As Integer) As Double`  
 ' Calculates geodesic longitude (in degrees) based on PL-2000 X, Y coordinates and meridian.  
-`To2000X(ByVal lat As Double, ByVal lon As Double, ByVal meridian As Integer) As Double`  
++ `To2000X(ByVal lat As Double, ByVal lon As Double, ByVal meridian As Integer) As Double`  
 Calculates PL-2000 X coordinate based on geodesic latitude, longitude and target meridian.  
-`To2000Y(ByVal lat As Double, ByVal lon As Double, ByVal meridian As Integer) As Double`  
++ `To2000Y(ByVal lat As Double, ByVal lon As Double, ByVal meridian As Integer) As Double`  
 Calculates PL-2000 Y coordinate based on geodesic latitude, longitude and target meridian.  
 
 ## Source code
