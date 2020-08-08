@@ -55,13 +55,15 @@ Normalizes azimuth to 0..360 range. __Note__: by default input and return values
 
 ### PL-2000 translation functions
 + `From2000Lat(x As Double, y As Double, meridian As Integer) As Double`  
-' Calculates geodesic latitude (in degrees) based on PL-2000 X, Y coordinates and meridian.  
+Calculates geodesic latitude (in degrees) based on PL-2000 X, Y coordinates and meridian.  
 + `From2000Lon(x As Double, y As Double, meridian As Integer) As Double`  
-' Calculates geodesic longitude (in degrees) based on PL-2000 X, Y coordinates and meridian.  
+Calculates geodesic longitude (in degrees) based on PL-2000 X, Y coordinates and meridian.  
 + `To2000X(lat As Double, lon As Double, meridian As Integer) As Double`  
 Calculates PL-2000 X coordinate based on geodesic latitude, longitude and target meridian.  
 + `To2000Y(lat As Double, lon As Double, meridian As Integer) As Double`  
 Calculates PL-2000 Y coordinate based on geodesic latitude, longitude and target meridian.  
+
+> Note: Most function parameters are 64-bit high precision. In VBA `Double` data type is 64-bit floating-point number, regardless of whether 32 or 64 bit Excel edition is used.
 
 ## Source code
 Excel workbooks contain unprotected source code. In addition, for better change tracking, source code has been placed separately in [Vincenty.bas](Vincenty.bas) file. This file is all what is required to add implemented functions to any other Excel workbook.
