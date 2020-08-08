@@ -40,6 +40,8 @@ Calculates geodesic azimuth (in degrees) between two points specified by latitud
 + `VincentyInvRevAzimuth(lat1 as Double, lon1 as Double, lat2 as Double, lon2 as Double, [returnAzimuth as Boolean = False]) as Variant` 
 Calculates geodesic reverse azimuth (in degrees) between two points specified by latitude/longitude (in numeric degrees) using Vincenty's inverse formula for ellipsoids.
 __Note__: by default azimuth from point 1 to point 2 at point 2 is returned. To obtain azimuth from point 2 to point 1 pass `returnAzimuth = true`.
+
+### Support functions
 + `ConvertDegrees(decimalDeg as Double, optional isLongitude as Variant) as String` 
 Converts decimal latitude, longitude or azimuth value to degrees/minutes/seconds string format. If isLongitude value is provided output will be formatted as either longitude (true) or latitude (false).
 + `ConvertDecimal(degreeDeg as String) as Variant` 
