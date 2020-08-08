@@ -53,7 +53,7 @@ Normalizes longitude to -180..+180 range.
 + `NormalizeAzimuth(azimuth as Double, [positiveOnly as Boolean = False]) as Double` 
 Normalizes azimuth to 0..360 range. __Note__: by default input and return values have the same sign. To obtain only positive values pass `positiveOnly = true`.
 
-### PL-2000 Translation Implementation
+### PL-2000 translation functions
 + `From2000Lat(ByVal x As Double, ByVal y As Double, ByVal meridian As Integer) As Double`  
 ' Calculates geodesic latitude (in degrees) based on PL-2000 X, Y coordinates and meridian.  
 + `From2000Lon(ByVal x As Double, ByVal y As Double, ByVal meridian As Integer) As Double`  
@@ -69,8 +69,8 @@ Excel workbooks contain unprotected source code. In addition, for better change 
 ## Validation
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
 against **Geoscience Australia** website:
-+ http://www.ga.gov.au/geodesy/datums/vincenty_direct.jsp
-+ http://www.ga.gov.au/geodesy/datums/vincenty_inverse.jsp  
++ https://geodesyapps.ga.gov.au/vincenty-direct
++ https://geodesyapps.ga.gov.au/vincenty-inverse
 
 and **GeodSolve Library** by Charles Karney:
 + https://geographiclib.sourceforge.io/cgi-bin/GeodSolve
