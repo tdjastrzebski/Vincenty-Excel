@@ -19,7 +19,7 @@ Attribute VB_Name = "PL2000"
 
 Option Explicit
 
-Private Const m0 As Double = 0.999923 ' skale m0
+Private Const m0 As Double = 0.999923 ' scale m0
 Private Const R0 As Double = 6367449.14577 ' Lagrange radius
 Private Const e As Double = 0.0818191910428
 Private Const PI As Double = 3.14159265358979
