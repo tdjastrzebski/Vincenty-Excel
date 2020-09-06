@@ -83,7 +83,7 @@ and **GeodSolve Library** by Charles Karney:
 
 ## Validation results - maximum deviation
 
-&nbsp;|Geoscience Australia|GeodSolve Library
+&nbsp;|GeodSolve Library|Geoscience Australia
 -----|-----:|-----:
 VincentyDirLat [degrees]|1.11E-09|3.96E-08
 VincentyDirLon [degees]|6.54E-09|2.88E-07
