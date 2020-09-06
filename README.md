@@ -72,22 +72,26 @@ Calculation results have been validated using 1200 test cases generated for 6 ra
 against **Geoscience Australia** website:
 + https://geodesyapps.ga.gov.au/vincenty-direct
 + https://geodesyapps.ga.gov.au/vincenty-inverse
++ https://geodesyapps.ga.gov.au/vincenty-batch-processing
 
 and **GeodSolve Library** by Charles Karney:
++ https://geographiclib.sourceforge.io/html/
 + https://geographiclib.sourceforge.io/cgi-bin/GeodSolve
 + https://geographiclib.sourceforge.io/scripts/geod-google.html
-+ https://link.springer.com/article/10.1007%2Fs00190-012-0578-z  
++ https://sourceforge.net/projects/geographiclib/
++ https://link.springer.com/article/10.1007%2Fs00190-012-0578-z
 
 ## Validation results - maximum deviation
 
 &nbsp;|Geoscience Australia|GeodSolve Library
 -----|-----:|-----:
-VincentyDirLat()|0.0000005%|0.0000000%
-VincentyDirLon()|0.0000002%|0.0000001%
-VincentyDirRevAzimuth()|0.0000833%|0.0000000%
-VincentyInvDistance()|0.0024183%|0.0001269%
-VincentyInvFwdAzimuth()|0.0008098%|0.0003928%
-VincentyInvRevAzimuth()|0.0005245%|0.0003928%
+VincentyDirLat [degrees]|1.11E-09|3.96E-08
+VincentyDirLon [degees]|6.54E-09|2.88E-07
+VincentyDirRevAzimuth [degrees]|6.54E-09|5.05E-07
+VincentyInvDistance [mm]|0.07240|0.53655
+VincentyInvFwdAzimuth [degrees]|1.46E-06|1.46E-06
+VincentyInvRevAzimuth [degrees]|1.46E-06|1.47E-06
+
 
 For complete test results refer to [VincentyTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
 
