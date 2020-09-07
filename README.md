@@ -25,7 +25,7 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 
 ## Implementation
 Solution contains 6 functions implementing **Vincenty's Direct** and **Vincenty's Inverse** formulae as well as 2 functions for Decimal&nbsp;↔&nbsp;Degrees/Minutes/Seconds format conversion, and uses **WGS84** model.  
-> Most function arguments and return values are 64-bit high precision. In VBA `Double` data type denotes 64-bit floating-point number, regardless of whether 32 or 64 bit Excel edition is used.
+> Most function arguments and return values are 64-bit high precision. In VBA `Double` data type denotes 64-bit floating-point number, regardless of Excel edition (32/64 bit).
 
 + `VincentyDirLat(lat as Double, lon as Double, azimuth as Double, distance as Double) as Variant` 
 Calculates geodesic latitude (in degrees) based on one point, bearing (in degrees) and distance (in m) using Vincenty's direct formula for ellipsoids.
@@ -81,7 +81,7 @@ and **GeodSolve Library** by Charles Karney:
 + https://sourceforge.net/projects/geographiclib/
 + https://link.springer.com/article/10.1007%2Fs00190-012-0578-z
 
-## Validation results - maximum deviation
+### Validation results - maximum deviation
 
 &nbsp;|GeodSolve Library|Geoscience Australia
 -----|-----:|-----:
@@ -92,6 +92,12 @@ VincentyInvDistance [mm]|0.07240|0.53655
 VincentyInvFwdAzimuth [degrees]|1.46E-06|1.46E-06
 VincentyInvRevAzimuth [degrees]|1.46E-06|1.47E-06
 
+### Conclusions:
++ Obtained results are quite coherent with GeodSolve Library results and noticeably less coherent with Geoscience Australia results.
++ The difference in distance calculated by GeodSolve Library and this Excel library does not exceed 0.07mm, which is a surprisingly good result since Vincenty's formulae is believed to be "only" 0.5mm accurate, although I do not know how this has been established and what impact floating-point arithmetic precision makes - if any.
++ Distances shorter than 3 thousand kilometers show even much higher cohesion with GeodSolve Library results, difference does not exceed 0.01mm.
++ Reverse azimuth results appear to be less accurate.
++ I was only able to compare results between Geoscience Australia, GeodSolve Library, which is believed to be very accurate, and this Excel library. I do not know the true values and better references.
 
 For complete test results refer to [VincentyTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
 
