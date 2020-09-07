@@ -92,12 +92,13 @@ VincentyInvDistance [mm]|0.07240|0.53655
 VincentyInvFwdAzimuth [degrees]|1.46E-06|1.46E-06
 VincentyInvRevAzimuth [degrees]|1.46E-06|1.47E-06
 
-### Conclusions:
+### Conclusions
 + Obtained results are quite coherent with GeodSolve Library results and noticeably less coherent with Geoscience Australia results.
 + The difference in distance calculated by GeodSolve Library and this Excel library does not exceed 0.07mm, which is a surprisingly good result since Vincenty's formulae is believed to be "only" 0.5mm accurate, although I do not know how this has been established and what impact floating-point arithmetic precision makes - if any.
-+ Distances shorter than 3 thousand kilometers show even much higher cohesion with GeodSolve Library results, difference does not exceed 0.01mm.
++ Distances shorter than 3 thousand kilometers show even much higher cohesion with GeodSolve Library results, differences do not exceed 0.01mm.
 + Reverse azimuth results appear to be less accurate.
-+ I was only able to compare results between Geoscience Australia, GeodSolve Library, which is believed to be very accurate, and this Excel library. I do not know the true values and I am not aware of substantially better references.
+
+I was only able to compare results between Geoscience Australia, GeodSolve Library, which is believed to be very accurate, and this Excel library. I do not know the true values and I am not aware of substantially better references.  
 
 For complete test results refer to [VincentyTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
 
