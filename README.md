@@ -69,21 +69,22 @@ Excel workbooks contain unprotected source code. In addition, for better change 
 
 ## Validation
 Calculation results have been validated using 1200 test cases generated for 6 range clusters and distance between 10 m and 30,000 km 
-against **Geoscience Australia** website:
-+ https://geodesyapps.ga.gov.au/vincenty-direct
-+ https://geodesyapps.ga.gov.au/vincenty-inverse
-+ https://geodesyapps.ga.gov.au/vincenty-batch-processing
-
-and **GeodSolve Library** by Charles Karney:
+against **GeographicLib** by Charles Karney:
 + https://geographiclib.sourceforge.io/html/
 + https://geographiclib.sourceforge.io/cgi-bin/GeodSolve
 + https://geographiclib.sourceforge.io/scripts/geod-google.html
 + https://sourceforge.net/projects/geographiclib/
 + https://link.springer.com/article/10.1007%2Fs00190-012-0578-z
 
+and **Geoscience Australia** website  
+
++ https://geodesyapps.ga.gov.au/vincenty-direct
++ https://geodesyapps.ga.gov.au/vincenty-inverse
++ https://geodesyapps.ga.gov.au/vincenty-batch-processing
+
 ### Validation results - maximum deviation
 
-&nbsp;|GeodSolve Library|Geoscience Australia
+&nbsp;|GeographicLib |Geoscience Australia
 -----|-----:|-----:
 VincentyDirLat [degrees]|1.11E-9|3.96E-8
 VincentyDirLon [degees]|6.54E-9|2.88E-7
@@ -93,17 +94,17 @@ VincentyInvFwdAzimuth [degrees]|1.46E-6|1.46E-6
 VincentyInvRevAzimuth [degrees]|1.46E-6|1.47E-6
 
 ### Conclusions
-+ The gathered results are surprisingly coherent with GeodSolve Library results and noticeably less coherent with Geoscience Australia results.
++ The gathered results are surprisingly coherent with GeographicLib results and noticeably less coherent with Geoscience Australia results.
 + Direct formulae
-  + Latitude differs from GeodSolve Library results by no more than 1.11E-9 degrees at distance greater than 20,000km. At distance shorter than 2,000km difference is less than 1.0E-10 degrees.
-  + Longitude differs from GeodSolve Library results by no more than 6.54E-9 degrees at distance greater than 10,000km and typically does not exceed 1.0E-10 degrees at shorter distances.
+  + Latitude differs from GeographicLib results by no more than 1.11E-9 degrees at distance greater than 20,000km. At distance shorter than 2,000km difference is less than 1.0E-10 degrees.
+  + Longitude differs from GeographicLib results by no more than 6.54E-9 degrees at distance greater than 10,000km and typically does not exceed 1.0E-10 degrees at shorter distances.
   + Reverse Azimuth differs by 6.45E-9 degrees max, exceeds 1.0E-9 at distance longer than 10,000km. At shorter distances most results stay below 1.0E-10 degrees.
 + Inverse formulae
-  + The difference in distance calculated by GeodSolve Library and this Excel library does not exceed 0.07mm, which is a surprisingly good result since Vincenty's formulae is believed to be "only" 0.5mm accurate, though little is known about how this has been established and what impact floating-point arithmetic precision makes - if any.
-  + Distances shorter than 3 thousand kilometers show even much higher cohesion with GeodSolve Library results, differences do not exceed 0.01mm.
-  + Calculated azimuths results differ from GeodSolve Library calculated values by 1.46E-6 degrees max at short distance. At about 2.5km difference drops to 1.0E-7 degrees, 1.0E-8 degrees at 10 km and to 1.0E-9 degrees at 100km.
+  + The difference in distance calculated by GeographicLib and this Excel library does not exceed 0.07mm, which is a surprisingly good result since Vincenty's formulae is believed to be "only" 0.5mm accurate, though little is known about how this has been established and what impact floating-point arithmetic precision makes - if any.
+  + Distances shorter than 3 thousand kilometers show even much higher cohesion with GeographicLib results, differences do not exceed 0.01mm.
+  + Calculated azimuths results differ from GeographicLib calculated values by 1.46E-6 degrees max at short distance. At about 2.5km difference drops to 1.0E-7 degrees, 1.0E-8 degrees at 10 km and to 1.0E-9 degrees at 100km.
 
-I was only able to compare results between Geoscience Australia, GeodSolve Library, which is believed to be very accurate, and this Excel library. I am not aware of substantially better references.  
+I was only able to compare results between Geoscience Australia, GeographicLib, which is believed to be very accurate, and this Excel library. I am not aware of substantially better references.  
 
 For complete test results refer to [VincentyTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
 
