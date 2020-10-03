@@ -85,18 +85,18 @@ and **GeodSolve Library** by Charles Karney:
 
 &nbsp;|GeodSolve Library|Geoscience Australia
 -----|-----:|-----:
-VincentyDirLat [degrees]|1.11E-09|3.96E-08
-VincentyDirLon [degees]|6.54E-09|2.88E-07
-VincentyDirRevAzimuth [degrees]|6.54E-09|5.05E-07
+VincentyDirLat [degrees]|1.11E-9|3.96E-8
+VincentyDirLon [degees]|6.54E-9|2.88E-7
+VincentyDirRevAzimuth [degrees]|6.54E-9|5.05E-7
 VincentyInvDistance [mm]|0.07240|0.53655
-VincentyInvFwdAzimuth [degrees]|1.46E-06|1.46E-06
-VincentyInvRevAzimuth [degrees]|1.46E-06|1.47E-06
+VincentyInvFwdAzimuth [degrees]|1.46E-6|1.46E-6
+VincentyInvRevAzimuth [degrees]|1.46E-6|1.47E-6
 
 ### Conclusions
 + The gathered results are coherent with GeodSolve Library results and noticeably less coherent with Geoscience Australia results.
 + The difference in distance calculated by GeodSolve Library and this Excel library does not exceed 0.07mm, which is a surprisingly good result since Vincenty's formulae is believed to be "only" 0.5mm accurate, though little is known about how this has been established and what impact floating-point arithmetic precision makes - if any.
 + Distances shorter than 3 thousand kilometers show even much higher cohesion with GeodSolve Library results, differences do not exceed 0.01mm.
-+ Inverse formulae calculated azimuth results are satisfactory, yet appear to be less accurate than other results. This may be a subject to further improvements.
++ Inverse formulae calculated azimuths results differ from GeodSolve Library calculated values by 1.46E-6 degrees max at short distance. At about 2.5km difference drops to 1.0E-7 degrees, 1.0E-8 degrees at 10 km and to 1.0E-9 degrees at 100km.
 
 I was only able to compare results between Geoscience Australia, GeodSolve Library, which is believed to be very accurate, and this Excel library. I am not aware of substantially better references.  
 
