@@ -98,7 +98,7 @@ VincentyInvRevAzimuth [degrees]|1.46E-6|1.47E-6
 + Direct formulae
   + Latitude differs from GeographicLib results by no more than 1.11E-9 degrees at distance greater than 20,000km. At distance shorter than 2,000km difference is less than 1.0E-10 degrees.
   + Longitude differs from GeographicLib results by no more than 6.54E-9 degrees at distance greater than 10,000km and typically does not exceed 1.0E-10 degrees at shorter distances.
-  + Reverse Azimuth differs by 6.45E-9 degrees max, exceeds 1.0E-9 at distance longer than 10,000km. At shorter distances most results stay below 1.0E-10 degrees.
+  + Reverse Azimuth differs by 6.45E-9 degrees max, at distances shorter than 10,000km difference stays below 1.0E-9 degrees, most of them are below 1.0E-10 degrees.
 + Inverse formulae
   + The difference in distance calculated by GeographicLib and this Excel library does not exceed 0.07mm, which is a surprisingly good result since Vincenty's formulae is believed to be "only" 0.5mm accurate, though little is known about how this has been established and what impact floating-point arithmetic precision makes - if any.
   + Distances shorter than 3 thousand kilometers show even much higher cohesion with GeographicLib results, differences do not exceed 0.01mm.
