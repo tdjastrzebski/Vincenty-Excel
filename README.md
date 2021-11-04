@@ -104,7 +104,7 @@ VincentyInvRevAzimuth [degrees]|1.46E-6|1.47E-6
   + Distances shorter than 3 thousand kilometers show even much higher cohesion with GeographicLib results, differences do not exceed 0.01mm.
   + Calculated azimuths results differ from GeographicLib calculated values by 1.46E-6 degrees max at short distance. At about 2.5km difference drops to 1.0E-7 degrees, 1.0E-8 degrees at 10 km and to 1.0E-9 degrees at 100km.
 
-I was only able to compare results between Geoscience Australia, GeographicLib, which is believed to be very accurate, and this Excel library. I am not aware of substantially better references.  
+I was only able to compare results between Geoscience Australia, GeographicLib, which is believed to be very accurate, and this Excel library. I am not aware of substantially better references available publicly.  
 
 For complete test results refer to [VincentyTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
 
