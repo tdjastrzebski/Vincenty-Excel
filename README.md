@@ -15,7 +15,7 @@ That is how I ended up developing my own, complete Vincenty's Direct and Inverse
 ## How to use it?
 + Vincenty functions can be simply added to any existing Excel workbook. Download [Vincenty.bas](../../raw/master/Vincenty.bas) file, in Excel hit [Alt+F11] to open Visual Basic editor. Next, in the browser panel right-click on **VBA Project (your file name)**, select **Import File** and choose downloaded [Vincenty.bas](../../raw/master/Vincenty.bas) module. Then save as 'macro-enabled workbook" and you will be able to use added functions in your Excel formulas. In a cell just start typing: `=Vincenty..` and you should see the list of added functions. Do NOT simply copy-paste file text content to a new Excel module - file contains some extra lines not visible in VBA editor.
 + Functions and their parameters are listed in Excel function wizard under the **Geodesic** category.
-+ If you prefer to use Excel Add-in instead you can simply save workbook as Add-in. Note that Add-in file must be placed in a directory registered as "Trusted Location". See [Add, remove, or change a trusted location](https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4) for more details. There is no IntelliSense available for VBA Add-in UDFs. Add-in, however, has one important advantage: it can be shared among many Excel workbooks, simplifying future updates.
++ If you prefer to use Excel Add-in instead, you can simply save workbook as Add-in. Note that Add-in file must be placed in a directory registered as "Trusted Location". See [Add, remove, or change a trusted location](https://support.office.com/en-us/article/add-remove-or-change-a-trusted-location-7ee1cdc2-483e-4cbb-bcb3-4e7c67147fb4) for more details. Although IntelliSense in not available for VBA add-in UDFs, add-in has one important advantage: it can be shared among many Excel workbooks, simplifying future updates.
 
 ## Excel files
 + [Vincenty.xlsm](../../raw/master/Vincenty.xlsm) - Excel Macro-Enabled Demo Workbook (demo)
@@ -104,7 +104,7 @@ VincentyInvRevAzimuth [degrees]|1.46E-6|1.47E-6
   + Distances shorter than 3 thousand kilometers show even much higher cohesion with GeographicLib results, differences do not exceed 0.01mm.
   + Calculated azimuths results differ from GeographicLib calculated values by 1.46E-6 degrees max at short distance. At about 2.5km difference drops to 1.0E-7 degrees, 1.0E-8 degrees at 10 km and to 1.0E-9 degrees at 100km.
 
-I was only able to compare results between Geoscience Australia, GeographicLib, which is believed to be very accurate, and this Excel library. I am not aware of substantially better references.  
+I was only able to compare results between Geoscience Australia, GeographicLib, which is believed to be very accurate, and this Excel library. I am not aware of substantially better references available publicly.  
 
 For complete test results refer to [VincentyTest.xlsm](../../raw/master/VincentyTest.xlsm) file.
 
