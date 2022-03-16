@@ -6,12 +6,12 @@ Attribute VB_Name = "Vincenty"
 ' https://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf
 ' https://geographiclib.sourceforge.io/geodesic-papers/vincenty75b.pdf
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-' Ported to VBA by (c) Tomasz Jastrzebski 2018-2019 MIT Licence
-' Version: 2020-07-03
+' Ported to VBA by (c) Tomasz Jastrzebski 2018-2022 MIT Licence
+' Version: 2022-03-16
 ' Latest version available at:
 ' https://github.com/tdjastrzebski/Vincenty-Excel
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-' Based on the implementation by Chris Veness, ver 2.2.0
+' Based on the implementation by Chris Veness, ver 2.4.0
 ' https://www.movable-type.co.uk/scripts/latlong-vincenty.html
 ' https://github.com/chrisveness/geodesy
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -20,6 +20,7 @@ Option Explicit
 
 Private Const PI = 3.14159265358979
 Private Const EPSILON12 As Double = 0.000000000001 ' 1E-12
+Private Const EPSILON24 As Double = 1E-24
 Private Const EPSILON16 As Double = 2 ^ -52 ' ~2.2E-16
 ' WGS84 ellipsiod
 Private Const low_a As Double = 6378137
@@ -63,7 +64,7 @@ Attribute VincentyDirLat.VB_ProcData.VB_Invoke_Func = " \n20"
     Dim p As DirParams: p = VincentyDir(lat, lon, azimuth, distance)
     
     Dim x As Double: x = p.sinU1 * p.sinSigma - p.cosU1 * p.cosSigma * p.cosAlpha1
-    Dim phi2 As Double: phi2 = Atan2(p.sinU1 * p.cosSigma + p.cosU1 * p.sinSigma * p.cosAlpha1, (1 - f) * Sqr(p.sinAlpha * p.sinAlpha + x * x))
+    Dim phi2 As Double: phi2 = Atan2(p.sinU1 * p.cosSigma + p.cosU1 * p.sinSigma * p.cosAlpha1, (1 - f) * Sqr(p.sinAlpha ^ 2 + x ^ 2))
  
     VincentyDirLat = ToDegrees(phi2)
     Exit Function
@@ -84,7 +85,7 @@ Attribute VincentyDirLon.VB_ProcData.VB_Invoke_Func = " \n20"
     
     Dim lambda As Double: lambda = Atan2(p.sinSigma * p.sinAlpha1, p.cosU1 * p.cosSigma - p.sinU1 * p.sinSigma * p.cosAlpha1)
     Dim C As Double: C = f / 16 * p.cosSqAlpha * (4 + f * (4 - 3 * p.cosSqAlpha))
-    Dim fix1 As Double: fix1 = p.cos2sigmaM + C * p.cosSigma * (-1 + 2 * p.cos2sigmaM * p.cos2sigmaM)
+    Dim fix1 As Double: fix1 = p.cos2sigmaM + C * p.cosSigma * (-1 + 2 * p.cos2sigmaM ^ 2)
     Dim L As Double: L = lambda - (1 - C) * f * p.sinAlpha * (p.sigma + C * p.sinSigma * fix1)
     
     Dim lambda2 As Double: lambda2 = p.lambda1 + L
@@ -249,27 +250,27 @@ Private Function VincentyDir(ByVal lat As Double, ByVal lon As Double, ByVal azi
     fix1 = -128 + uSq * (74 - 47 * uSq)
     Dim B As Double: B = uSq / 1024 * (256 + uSq * fix1)
     
-    p.sigma = s / (low_b * A)
+    p.sigma = s / (low_b * A) ' sigma = angular distance P1-P2 on the sphere
     Dim deltaSigma As Double
     Dim sigma2 As Double
     Dim iterationCount As Integer:  iterationCount = 0
     
     Do
-        p.cos2sigmaM = Cos(2 * sigma1 + p.sigma)
+        p.cos2sigmaM = Cos(2 * sigma1 + p.sigma) ' sigmaM = angular distance on the sphere from the equator to the midpoint of the line
         p.sinSigma = Sin(p.sigma)
         p.cosSigma = Cos(p.sigma)
-        deltaSigma = B * p.sinSigma * (p.cos2sigmaM + B / 4 * (p.cosSigma * (-1 + 2 * p.cos2sigmaM * p.cos2sigmaM) - _
-            B / 6 * p.cos2sigmaM * (-3 + 4 * p.sinSigma * p.sinSigma) * (-3 + 4 * p.cos2sigmaM * p.cos2sigmaM)))
+        deltaSigma = B * p.sinSigma * (p.cos2sigmaM + B / 4 * (p.cosSigma * (-1 + 2 * p.cos2sigmaM ^ 2) _
+            - B / 6 * p.cos2sigmaM * (-3 + 4 * p.sinSigma ^ 2) * (-3 + 4 * p.cos2sigmaM ^ 2)))
         sigma2 = p.sigma
         p.sigma = s / (low_b * A) + deltaSigma
         iterationCount = iterationCount + 1
-    Loop While Abs(p.sigma - sigma2) > EPSILON12 And iterationCount < MaxIterations
+    Loop While Abs(p.sigma - sigma2) > EPSILON12 And iterationCount < MaxIterations ' iterate until negligible change in lambdaP (~0.006mm)
     
     If iterationCount >= MaxIterations Then
         ' failed to converge
         Err.Raise (Excel.xlErrNA): Exit Function
     End If
-        
+    
     VincentyDir = p
 End Function
 
@@ -290,7 +291,7 @@ Private Function VincentyInv(ByVal lat1 As Double, ByVal lon1 As Double, ByVal l
     lat1 = ToRadians(lat1)
     lat2 = ToRadians(lat2)
     
-    Dim L As Double: L = ToRadians(lon2 - lon1)
+    Dim L As Double: L = ToRadians(lon2 - lon1) '  L = difference in longitude, U = reduced latitude, defined by tan U=(1-f)*Tan(lat)
     
     Dim tanU1 As Double: tanU1 = (1 - f) * Tan(lat1)
     p.cosU1 = 1 / Sqr(1 + (tanU1 ^ 2))
@@ -302,18 +303,18 @@ Private Function VincentyInv(ByVal lat1 As Double, ByVal lon1 As Double, ByVal l
     
     Dim antipodal As Boolean: antipodal = Abs(L) > PI / 2 Or Abs(lat2 - lat1) > PI / 2
     
-    Dim lambda As Double: lambda = L
+    Dim lambda As Double: lambda = L ' lambda = difference in longitude on an auxiliary sphere
     p.sigma = IIf(antipodal, PI, 0)
     cosSigma = IIf(antipodal, -1, 1)
-    cos2sigmaM = 1
-    cosSqAlpha = 1
+    cos2sigmaM = 1 ' cos2sigmaM = angular distance on the sphere from the equator to the midpoint of the line
+    cosSqAlpha = 1 ' cosSqAlpha = azimuth of the geodesic at the equator
     Dim lambdaP As Double
         
     Do
         p.sinLambda = Sin(lambda)
         p.cosLambda = Cos(lambda)
         p.sinSqSigma = ((p.cosU2 * p.sinLambda) ^ 2) + ((p.cosU1 * p.sinU2 - p.sinU1 * p.cosU2 * p.cosLambda) ^ 2)
-        If Abs(p.sinSqSigma) < EPSILON16 Then Exit Do  ' co-incident points/antipodal points
+        If Abs(p.sinSqSigma) < EPSILON24 Then Exit Do  ' co-incident/antipodal points (Sigma < ~0.006mm)
         sinSigma = Sqr(p.sinSqSigma)
         cosSigma = p.sinU1 * p.sinU2 + p.cosU1 * p.cosU2 * p.cosLambda
         p.sigma = Atan2(sinSigma, cosSigma)
@@ -339,7 +340,7 @@ Private Function VincentyInv(ByVal lat1 As Double, ByVal lon1 As Double, ByVal l
         End If
         
         iterationCount = iterationCount + 1
-    Loop While Abs(lambda - lambdaP) > EPSILON12 And iterationCount < MaxIterations
+    Loop While Abs(lambda - lambdaP) > EPSILON12 And iterationCount < MaxIterations ' iterate until negligible change in lambdaP (~0.006mm)
     
     If iterationCount >= MaxIterations Then
         ' failed to converge
@@ -358,7 +359,7 @@ Private Function VincentyInv(ByVal lat1 As Double, ByVal lon1 As Double, ByVal l
     fix2 = upper_B / 6 * cos2sigmaM * (-3 + 4 * sinSigma ^ 2) * (-3 + 4 * cos2sigmaM ^ 2)
     
     p.deltaSigma = upper_B * sinSigma * (cos2sigmaM + upper_B / 4 * (fix1 - fix2))
-    p.s = low_b * p.upper_A * (p.sigma - p.deltaSigma)
+    p.s = low_b * p.upper_A * (p.sigma - p.deltaSigma) ' s = length of the geodesic
     
     VincentyInv = p
 End Function
