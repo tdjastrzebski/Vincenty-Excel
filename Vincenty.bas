@@ -7,7 +7,7 @@ Attribute VB_Name = "Vincenty"
 ' https://geographiclib.sourceforge.io/geodesic-papers/vincenty75b.pdf
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ' Ported to VBA by (c) Tomasz Jastrzebski 2018-2022 MIT Licence
-' Version: 2022-03-16
+' Version: 2022-07-03
 ' Latest version available at:
 ' https://github.com/tdjastrzebski/Vincenty-Excel
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -259,8 +259,9 @@ Private Function VincentyDir(ByVal lat As Double, ByVal lon As Double, ByVal azi
         p.cos2sigmaM = Cos(2 * sigma1 + p.sigma) ' sigmaM = angular distance on the sphere from the equator to the midpoint of the line
         p.sinSigma = Sin(p.sigma)
         p.cosSigma = Cos(p.sigma)
-        deltaSigma = B * p.sinSigma * (p.cos2sigmaM + B / 4 * (p.cosSigma * (-1 + 2 * p.cos2sigmaM ^ 2) _
-            - B / 6 * p.cos2sigmaM * (-3 + 4 * p.sinSigma ^ 2) * (-3 + 4 * p.cos2sigmaM ^ 2)))
+        fix1 = (-1 + 2 * p.cos2sigmaM ^ 2)
+        fix2 = (-3 + 4 * p.sinSigma ^ 2) * (-3 + 4 * p.cos2sigmaM ^ 2)
+        deltaSigma = B * p.sinSigma * (p.cos2sigmaM + B / 4 * (p.cosSigma * fix1 - B / 6 * p.cos2sigmaM * fix2))
         sigma2 = p.sigma
         p.sigma = s / (low_b * A) + deltaSigma
         iterationCount = iterationCount + 1
